@@ -917,3 +917,20 @@ html[data-theme="dark"] .bt-big .em{background:rgba(255,255,255,.55)}
 @media (min-width:561px){.bt-big{grid-template-columns:none}}
 @media (min-width:981px) and (max-width:1250px){.bt-big{display:flex}}
 @media (max-height:800px) and (min-width:981px){.bt-big b{font-size:clamp(3rem,4.8vw,4.2rem);margin-top:40px}.bt-stats b{margin-top:36px;font-size:clamp(1.9rem,3vw,2.6rem)}}
+/* v16 Projects grid: every row fills all 6 columns */
+@media (min-width:981px){
+  .bento .t-a,.bento .t-b{grid-column:span 3;grid-row:auto}
+  .bento .t-c,.bento .t-d,.bento .t-e,.bento .t-f,.bento .t-g,.bento .t-h{grid-column:span 3}
+  .bento .t-a .stack,.bento .t-b .stack{margin-top:auto}
+  .bento .t-a .go,.bento .t-b .go{margin-top:14px}
+}
+@media (min-width:561px) and (max-width:980px){
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .bento .t-a,.bento .t-b,.bento .t-c,.bento .t-d,.bento .t-e,.bento .t-f,.bento .t-g,.bento .t-h{grid-column:span 1;grid-row:auto}
+}
+.bento .mini{align-items:stretch}.bento .mini>div{height:100%}
+.bento .mini{margin-bottom:14px}
+.bento .mini>div span{line-height:1.3}
+.bento{min-width:0}.bento .tile{min-width:0;max-width:100%}
+.bento .mini{grid-template-columns:repeat(auto-fit,minmax(0,1fr))}
+.bento .stack{flex-wrap:wrap}
