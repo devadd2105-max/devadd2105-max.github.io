@@ -289,6 +289,8 @@
     function show(k) {
       imgs[i].classList.remove('on'); i = k % imgs.length; imgs[i].classList.add('on');
       n.textContent = '0' + (i + 1); l.textContent = imgs[i].dataset.l; tt.textContent = imgs[i].dataset.t;
+      var ca = document.querySelector('#vf .vf-cap a'), g = imgs[i].dataset.go || 'photography';
+      if (ca) { ca.setAttribute('href', '#' + g); ca.setAttribute('data-go', g); ca.innerHTML = (imgs[i].dataset.link || 'Open the gallery') + ' &rarr;'; }
       bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = '';
     }
     function start() { if (RM || t) return; t = setInterval(function () { show(i + 1); }, D); document.getElementById('vf').classList.add('run'); }
