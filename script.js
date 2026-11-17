@@ -543,3 +543,29 @@
   });
   paint();
 })();
+
+/* ---------- visit counter (privacy-light: one anonymous number, no cookies) ---------- */
+(function () {
+  var els = document.querySelectorAll('[data-visits]'); if (!els.length) return;
+  var NS = 'devadd2105-max-github-io', KEY = 'visits', BASE = 'https://abacus.jasoncameron.dev/';
+  var SINCE = '17 Nov 2026';
+  var host = location.hostname, live = /\.github\.io$/.test(host);
+  var today = new Date().toISOString().slice(0, 10), counted = false, owner = false;
+  try {
+    if (/[?&]nocount\b/.test(location.search)) localStorage.setItem('nocount', '1');
+    owner = !!localStorage.getItem('nocount');
+    counted = localStorage.getItem('vcDay') === today;
+  } catch (e) {}
+  function show(n) {
+    var txt = Number(n).toLocaleString('en-SG') + (Number(n) === 1 ? ' visit' : ' visits') + ' since ' + SINCE;
+    els.forEach(function (el) { el.querySelector('.vtxt').textContent = txt; el.hidden = false; });
+  }
+  if (!live) return;
+  var mode = (counted || owner) ? 'get' : 'hit';
+  fetch(BASE + mode + '/' + NS + '/' + KEY).then(function (r) {
+    if (!r.ok) throw 0; return r.json();
+  }).then(function (j) {
+    if (mode === 'hit') { try { localStorage.setItem('vcDay', today); } catch (e) {} }
+    if (j && typeof j.value === 'number') show(j.value);
+  }).catch(function () { /* counter unavailable: stay hidden */ });
+})();
