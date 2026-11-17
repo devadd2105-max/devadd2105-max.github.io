@@ -903,3 +903,17 @@ html[data-theme="dark"] .certfeat p b{color:#fff}
 #cp4 .cgrid{align-items:start}
 @media (max-width:720px){#cp4 .cphs{grid-template-columns:1fr}}
 #cp4 .cph{display:flex;flex-direction:column}#cp4 .cph img{flex:1}#cp4 .cph figcaption{min-height:2.9em}
+/* v15 emoji chips, simpler big tile */
+.bt-big,.bt-stats li{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;align-items:flex-start}
+.bt .em{position:absolute;top:12px;left:14px;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:1.2rem;line-height:1;background:rgba(255,255,255,.75);box-shadow:0 1px 0 rgba(10,26,92,.08)}
+.bt-big .em{background:rgba(255,255,255,.55)}
+.bt-big{padding:14px 22px;min-height:0}
+.bt-big b{font-size:clamp(3.4rem,5.8vw,5.2rem);line-height:.9;font-weight:800;letter-spacing:-.05em;margin-top:44px}
+.bt-big .lab,.bt-stats .lab{font-size:.84rem;font-weight:700;line-height:1.25;margin:0}
+.bt-stats li{padding:14px 18px;justify-content:flex-end}
+.bt-stats b{margin-top:40px}
+html[data-theme="dark"] .bt .em{background:rgba(255,255,255,.1)}
+html[data-theme="dark"] .bt-big .em{background:rgba(255,255,255,.55)}
+@media (min-width:561px){.bt-big{grid-template-columns:none}}
+@media (min-width:981px) and (max-width:1250px){.bt-big{display:flex}}
+@media (max-height:800px) and (min-width:981px){.bt-big b{font-size:clamp(3rem,4.8vw,4.2rem);margin-top:40px}.bt-stats b{margin-top:36px;font-size:clamp(1.9rem,3vw,2.6rem)}}
