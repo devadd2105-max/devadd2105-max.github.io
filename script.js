@@ -43,6 +43,7 @@
     cur = id;
     document.title = (id === 'home' ? 'Balamurugan Devadarshan | Portfolio' : LABEL[id] + ' | Balamurugan Devadarshan');
     if (push !== false) { try { history.pushState(null, '', '#' + id); } catch (e) { location.hash = id; } }
+    if (push !== false && window.goatcounter && window.goatcounter.count) { try { window.goatcounter.count({ path: '/' + id, title: id.charAt(0).toUpperCase() + id.slice(1) }); } catch (e) {} }
     requestAnimationFrame(setInd); setTimeout(setInd, 80); setTimeout(setInd, 400);
     if (id === 'home') runCounters();
     netRun(id === 'home');
@@ -552,7 +553,7 @@
   var host = location.hostname, live = /\.github\.io$/.test(host);
   var today = new Date().toISOString().slice(0, 10), counted = false, owner = false;
   try {
-    if (/[?&]nocount\b/.test(location.search)) localStorage.setItem('nocount', '1');
+    if (/[?&]nocount\b/.test(location.search)) { localStorage.setItem('nocount', '1'); localStorage.setItem('skipgc', 't'); }
     owner = !!localStorage.getItem('nocount');
     counted = localStorage.getItem('vcDay') === today;
   } catch (e) {}
