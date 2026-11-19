@@ -991,3 +991,6 @@ figcaption,figcaption span,li small,.mono small{font-size:max(.78rem,12px)}
 .mfig{margin:16px 0 0;border-radius:12px;overflow:hidden;border:1px solid rgba(253,197,0,.4)}
 .mfig img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 40%}
 .mfig figcaption{padding:8px 12px;font-size:.85rem}
+
+.panel.hasph .pf.awardspic{grid-column:1/-1;margin:0}
+.panel.hasph .pf.awardspic img{width:100%;height:auto;aspect-ratio:4/3;max-height:560px;object-fit:cover;object-position:50% 55%}
