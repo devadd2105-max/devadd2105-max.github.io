@@ -6,8 +6,8 @@
   var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var TOUCH = window.matchMedia('(hover: none)').matches;
   var GH = 'https://github.com/devadd2105-max';
-  var ORDER = ['home', 'about', 'leadership', 'projects', 'awards', 'credentials', 'photography', 'contact'];
-  var LABEL = { home: 'Home', about: 'About', leadership: 'Leadership', projects: 'Projects', awards: 'Awards', credentials: 'Service', photography: 'Photos', contact: 'Contact' };
+  var ORDER = ['home', 'about', 'leadership', 'projects', 'programmes', 'awards', 'credentials', 'photography', 'contact'];
+  var LABEL = { home: 'Home', about: 'About', leadership: 'Leadership', projects: 'Projects', programmes: 'Programmes', awards: 'Awards', credentials: 'Service', photography: 'Photos', contact: 'Contact' };
   var app = $('#main'), dock = $('#dock'), ind = $('#ind');
   var cur = null, counted = false;
 
@@ -373,7 +373,7 @@
     skills: 'Technical:   Python, JavaScript/HTML/CSS, networking basics, CTF, data fundamentals\nDomain:      cybersecurity fundamentals, safe online practices\nPeople:      team leadership, public speaking, event hosting, duty rotation planning, teaching, photography\nBeyond:      Tamil speech, Taekwondo (green belt), swimming (silver), guitar (beginner), reading',
     reading: 'Avid reader. Proud Holmesian: a devoted Sherlock Holmes fan.',
     leadership: '2026-now   President, Infocomm Club (St. Andrew\'s JC)\n2026       ChrySAlis 2026, leaders\' programme (SAJC)\n2022-26    Class Committee roles (ICT, Biology, Literature, Classroom Care, Economics)\n2024-25    Head of Photography, Publications & Media Club (180+ hours behind the lens)\n2022-25    Student Council, Bonding / Welfare / Events committees\n2023-25    Science Ambassador (Compost Bin Rep)\n2024       Capture Beginnings, student-initiated photography course\n2022-24    Debate, member\n2016-21    Senior Prefect, Prefectorial Board (primary school)',
-    projects: 'SG Wayfinder   Singapore navigation game: locate, plan, predict (GitHub)\nClearway       lunar mission browser, NASA Space Apps 2026 (GitHub)\nSentinel       programming + networking programme, 100% coursework\nCTF            Cyber Sports Day 2026, 2nd Runner-Up (Team)\nCyberthon      online cybersecurity + AI competition, 2 May 2026\nSession        Python + cybersecurity workshop for students\nCapture Beginnings   student-initiated photography course (2024)',
+    projects: 'SG Wayfinder   Singapore navigation game: locate, plan, predict (GitHub)\nClearway       lunar mission browser, NASA Space Apps 2026 (GitHub)\nCasebook 221B   Victorian detective game, play as Holmes (GitHub)\nCrack the Password   how fast a password falls (GitHub)\nFocal          browser photo coach (GitHub)\n(programmes, competitions and events are on the Programmes page)',
     awards: (document.querySelectorAll('.award').length) + ' awards and certificates, ' + document.querySelectorAll('.award[data-cat~="podium"]').length + ' podium finishes. Highlights:\n  1st  Literary Confluence speech competition (2023)\n  1st  Mother Tongue Fortnight (2024)\n  1st  MTL Fortnight Tamil singing (2017)\n  3rd  Cyber Sports Day CTF, 2nd Runner-Up (2026)\nSee the Awards page for every one, with dates.',
     credentials: 'Earned:  ICDL Big Data, seeNTU Python, Sentinel coursework (100%), Certificate of Distinction\nPlanned: Google Cybersecurity Certificate, CS50 Cybersecurity, CS50P, Fortinet NSE 1-2, Cisco Cybersecurity Essentials, TryHackMe',
     github: GH + '\n  ' + GH + '/sg-WayFinder\n  ' + GH + '/Clearway'

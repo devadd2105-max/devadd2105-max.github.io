@@ -974,3 +974,10 @@ figcaption,figcaption span,li small,.mono small{font-size:max(.78rem,12px)}
 @media (min-width:981px){.bento .t-i,.bento .t-j,.bento .t-k{grid-column:span 2;grid-row:auto}}
 @media (min-width:561px) and (max-width:980px){.bento .t-i,.bento .t-j{grid-column:span 1;grid-row:auto}.bento .t-k{grid-column:span 2;grid-row:auto}}
 .bento .t-i .stack,.bento .t-j .stack,.bento .t-k .stack{margin-top:10px}
+
+/* Programmes view */
+.grph{font-family:var(--sans);font-size:1.05rem;margin:26px 0 12px;color:var(--mu);letter-spacing:0}
+.bento.b2 .tile,.bento.b3 .tile{grid-row:auto}
+@media (min-width:981px){.bento.b2 .tile{grid-column:span 3}.bento.b3 .tile{grid-column:span 2}}
+@media (min-width:561px) and (max-width:980px){.bento.b2 .tile,.bento.b3 .tile{grid-column:span 1}.bento.b3 .tile:last-child{grid-column:span 2}}
+@media (max-width:560px){.bento.b2 .tile,.bento.b3 .tile{grid-column:1/-1}}
