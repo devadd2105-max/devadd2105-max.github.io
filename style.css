@@ -969,3 +969,8 @@ html[data-theme="dark"] .bt-big .em{background:rgba(255,255,255,.55)}
 .bento .mini>div span{display:block;font-size:.8rem;line-height:1.3}
 .lab.mono,small,.n.mono,.mono small,.rl button span,.rl button small,.railwrap span,.tl span{font-size:max(.78rem,12px)}
 figcaption,figcaption span,li small,.mono small{font-size:max(.78rem,12px)}
+
+/* new project tiles: three across, rows fill the width */
+@media (min-width:981px){.bento .t-i,.bento .t-j,.bento .t-k{grid-column:span 2;grid-row:auto}}
+@media (min-width:561px) and (max-width:980px){.bento .t-i,.bento .t-j{grid-column:span 1;grid-row:auto}.bento .t-k{grid-column:span 2;grid-row:auto}}
+.bento .t-i .stack,.bento .t-j .stack,.bento .t-k .stack{margin-top:10px}

@@ -8,7 +8,7 @@
 <title>Balamurugan Devadarshan | Portfolio: Python, cybersecurity &amp; leadership</title>
 <meta name="description" content="Portfolio of Balamurugan Devadarshan (Devadarshan), a Singaporean student at St. Andrew's Junior College, President of the Infocomm Club. Python, cybersecurity, public speaking, photography and a decade of student leadership.">
 <meta name="author" content="Balamurugan Devadarshan">
-<meta name="keywords" content="Balamurugan Devadarshan, Devadarshan, portfolio, Singapore student, Python, cybersecurity, CTF, Infocomm Club, St. Andrew's Junior College, SG Wayfinder">
+<meta name="keywords" content="Balamurugan Devadarshan, Devadarshan, portfolio, Singapore student, Python, cybersecurity, CTF, Infocomm Club, St. Andrew's Junior College, SG Wayfinder, Casebook 221B, Crack the Password, Focal">
 <meta name="theme-color" content="#00296B">
 <link rel="canonical" href="https://devadd2105-max.github.io/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -112,7 +112,7 @@
         </div>
         <div class="pillars">
           <div class="card"><h3>Lead</h3><p>Prefect, Student Council, class committees and now Infocomm Club President.</p></div>
-          <div class="card"><h3>Build</h3><p>Python projects, web apps and games such as SG Wayfinder.</p></div>
+          <div class="card"><h3>Build</h3><p>Python projects, web apps and games such as SG Wayfinder, Casebook 221B and Focal.</p></div>
           <div class="card"><h3>Speak</h3><p>Tamil and English speech, storytelling and event hosting.</p></div>
         </div>
         <ul class="chips" aria-label="Skills and interests"><li>Python</li><li>Cybersecurity</li><li>JavaScript</li><li>Public speaking</li><li>Team leadership</li><li>People management</li><li>Duty rotation planning</li><li>Photography</li><li>Reading</li></ul>
@@ -155,7 +155,7 @@
         <div class="tpanel" role="tabpanel" id="mm0" aria-labelledby="mt0"><ul class="chips"><li>Python &amp; building things</li><li>Cybersecurity &amp; CTFs</li><li>Photography</li><li>Tamil speech</li><li>Reading</li><li>Sherlock Holmes</li><li>Guitar</li><li>Taekwondo</li><li>Swimming</li></ul></div>
         <div class="tpanel" role="tabpanel" id="mm1" aria-labelledby="mt1" hidden><ul class="pts">
           <li><b>Leading people.</b> President of the Infocomm Club, Head of Photography, Student Council, Senior Prefect. <a href="#leadership" data-go="leadership">See the roles &rarr;</a></li>
-          <li><b>Building.</b> SG Wayfinder and Clearway, both with zero dependencies. <a href="#projects" data-go="projects" data-tab="1">See the code &rarr;</a></li>
+          <li><b>Building.</b> Clearway, SG Wayfinder, Casebook 221B, Crack the Password and Focal, all with no dependencies to install. <a href="#projects" data-go="projects" data-tab="1">See the code &rarr;</a></li>
           <li><b>Speaking.</b> First Prize at Literary Confluence, Tamil speech podiums, emcee at the JC Cyber Sports Day. <a href="#awards" data-go="awards">See the awards &rarr;</a></li>
           <li><b>Teaching.</b> I taught juniors photography, co-created Capture Beginnings and run a Python and cybersecurity session.</li>
         </ul></div>
@@ -195,7 +195,7 @@
 <section tabindex="-1" class="view" id="projects" data-title="Projects" aria-labelledby="pr-h">
   <div class="wrap">
     <div class="head"><p class="eyebrow mono">Projects &amp; programmes</p><h2 class="vh2" id="pr-h">Things I've <em>built</em> and done</h2>
-    <p class="sub">Case studies, the real code behind them, and a live demo you can try. All code for my two web projects is public on <a href="https://github.com/devadd2105-max" target="_blank" rel="noopener">GitHub</a>.</p></div>
+    <p class="sub">Case studies, the real code behind them, and a live demo you can try. All code for my web projects is public on <a href="https://github.com/devadd2105-max" target="_blank" rel="noopener">GitHub</a>.</p></div>
     <div class="fchips tabs" role="tablist" aria-label="Project views" id="prt">
       <button type="button" role="tab" aria-selected="true" aria-controls="pp0" id="pt0">Case studies</button>
       <button type="button" role="tab" aria-selected="false" aria-controls="pp1" id="pt1">Code</button>
@@ -218,6 +218,27 @@
         <p>A Singapore navigation game. You are dropped into Street View somewhere in Singapore with no labels, then work out where you are, plan a route and predict the journey time.</p>
         <div class="mini"><div><b>3</b><span>steps per round: locate, plan, predict</span></div><div><b>110</b><span>approx. MRT stations modelled</span></div><div><b>19</b><span>unit tests</span></div></div>
         <ul class="stack mono"><li>JavaScript (ES modules)</li><li>Hand-written map engine</li><li>OSRM routing</li><li>No build step</li></ul>
+        <span class="go">Open the case study</span>
+      </button>
+      <button type="button" class="card tile t-i" data-modal="m-case">
+        <span class="tag mono">Web game · GitHub</span>
+        <h3>Casebook 221B</h3>
+        <p>A Victorian detective game played as Sherlock Holmes. No menu: type anything you would say or do, and work out who stole the Marlowe Star in five days.</p>
+        <ul class="stack mono"><li>JavaScript (ES modules)</li><li>Free-text parser</li><li>No build step</li></ul>
+        <span class="go">Open the case study</span>
+      </button>
+      <button type="button" class="card tile t-j" data-modal="m-crack">
+        <span class="tag mono">Security tool · Infocomm Club</span>
+        <h3>Crack the Password</h3>
+        <p>A browser lab that shows how fast a password falls, with a live entropy meter and a generator for ones that hold. Built for my Discovery Fortnight session.</p>
+        <ul class="stack mono"><li>JavaScript</li><li>Entropy model</li><li>Runs offline in the browser</li></ul>
+        <span class="go">Open the case study</span>
+      </button>
+      <button type="button" class="card tile t-k" data-modal="m-focal">
+        <span class="tag mono">Photography tool · GitHub</span>
+        <h3>Focal</h3>
+        <p>A photo coach that runs in your browser. It checks framing, light, sharpness and camera settings, then draws what to fix on the picture. Your photo never leaves the page.</p>
+        <ul class="stack mono"><li>JavaScript (ES modules)</li><li>Canvas image analysis</li><li>22 tests</li></ul>
         <span class="go">Open the case study</span>
       </button>
       <button type="button" class="card tile t-c" data-modal="m-sent">
@@ -439,6 +460,50 @@
       <div class="mact"><a class="btn primary sm" href="https://github.com/devadd2105-max/sg-WayFinder" target="_blank" rel="noopener">View on GitHub</a></div>
     </div>
 
+    <div class="more" id="m-case" data-title="Casebook 221B">
+      <span class="tag mono">Web game · open source (MIT)</span>
+      <dl class="facts">
+        <div><dt>The idea</dt><dd>You play Sherlock Holmes in the sitting room at 221B Baker Street, Sunday 12 October 1890. Sir Alistair Marlowe's diamond has vanished from a locked safe. You have a telegram and five days, and there is no list of choices to pick from.</dd></div>
+        <div><dt>How it plays</dt><dd>Type what you would say or do: interview anyone, search the study, send Watson to the newspapers of your choice, wire Mycroft, hire the Baker Street Irregulars, tail a suspect. Name the culprit, then hand him to Lestrade or let him go. A 1000-point score and a report on the most ideal route follow.</dd></div>
+        <div><dt>Stack</dt><dd>Plain HTML, CSS and JavaScript ES modules, with no build step. Witnesses are scripted through a data-driven option registry with fuzzy parsing of topic, tone, names, offers and times. It is not a live language model.</dd></div>
+        <div><dt>My role</dt><dd>Designed and built it.</dd></div>
+      </dl>
+      <ul class="list">
+        <li>A living clock: cab fares, travel time, shop hours, people's schedules and a thief who grows wary.</li>
+        <li>Typos are forgiven, and commands can be chained with a semicolon or "then".</li>
+        <li>20 automated tests, plus simulations that run 100 random full playthroughs and check every accusation and verdict.</li>
+      </ul>
+      <div class="mact"><a class="btn primary sm" href="https://devadd2105-max.github.io/221b-casebook/" target="_blank" rel="noopener">Play it</a><a class="btn ghost sm" href="https://github.com/devadd2105-max/221b-casebook" target="_blank" rel="noopener">View on GitHub</a></div>
+    </div>
+
+    <div class="more" id="m-crack" data-title="Crack the Password">
+      <span class="tag mono">Security tool · Infocomm Club</span>
+      <dl class="facts">
+        <div><dt>The idea</dt><dd>Built for the Infocomm Club's Discovery Fortnight session, where students write their own password checker in Python. Students enter details a stranger could read off social media, then a password, and see how quickly it would fall.</dd></div>
+        <div><dt>What it shows</dt><dd>A live entropy meter with the effective value (what a smart attacker needs) beside the theoretical one (from length and character types alone). The gap between the two is the lesson. It also gives crack times under four attacks, takes the password apart into the pieces an attacker prices, and generates a stronger one.</dd></div>
+        <div><dt>How it estimates</dt><dd>It prices every way of splitting the password into pieces and keeps the cheapest, in the style of zxcvbn: common-password ranks, a dictionary of about 57,000 English words, your own details, dates, sequences and keyboard walks. It is a set of explainable rules, not machine learning, and the project says its estimates are rough.</dd></div>
+        <div><dt>Privacy</dt><dd>Everything runs in the browser. Nothing is sent anywhere or stored. Generated passwords use the browser's secure random generator.</dd></div>
+      </dl>
+      <p>20 automated tests cover the engine. It runs with no build step.</p>
+      <div class="mact"><a class="btn primary sm" href="https://devadd2105-max.github.io/crack-the-password/" target="_blank" rel="noopener">Try it</a><a class="btn ghost sm" href="https://github.com/devadd2105-max/crack-the-password" target="_blank" rel="noopener">View on GitHub</a></div>
+    </div>
+
+    <div class="more" id="m-focal" data-title="Focal">
+      <span class="tag mono">Photography tool · open source (MIT)</span>
+      <dl class="facts">
+        <div><dt>The idea</dt><dd>A photo coach that builds on my photography background. Drop in a photo, optionally say what you are aiming for, and Focal checks it and draws what to fix right on the picture.</dd></div>
+        <div><dt>What it checks</dt><dd>Framing techniques (thirds, golden ratio, leading lines, symmetry, negative space, headroom and more), technical faults (horizon tilt, exposure, clipping, sharpness against noise, colour cast, haze) and camera settings read from EXIF or typed in. The score is half technical, half impact, so a clean but plain picture does not score near the top.</dd></div>
+        <div><dt>Stack</dt><dd>Plain JavaScript ES modules with the image analysis done on a canvas in the browser. No server, no upload and no build step. Fonts are bundled, so nothing is fetched from elsewhere.</dd></div>
+        <div><dt>My role</dt><dd>Designed and built it.</dd></div>
+      </dl>
+      <ul class="list">
+        <li>Overlays on the photo for subject, lines, horizon, focus, clipping and empty space, with editor-style keyboard shortcuts.</li>
+        <li>Your stated goal changes the judging, so a deliberate dark silhouette is not marked as a mistake.</li>
+        <li>22 automated tests, and it was checked against a set of real photos. It says openly which things it cannot judge, such as emotion and story.</li>
+      </ul>
+      <div class="mact"><a class="btn primary sm" href="https://devadd2105-max.github.io/Focal/" target="_blank" rel="noopener">Try it</a><a class="btn ghost sm" href="https://github.com/devadd2105-max/Focal" target="_blank" rel="noopener">View on GitHub</a></div>
+    </div>
+
     <div class="more" id="m-clear" data-title="Clearway">
       <span class="tag mono">NASA Space Apps Challenge 2026 · open source</span>
       <dl class="facts">
@@ -625,7 +690,7 @@
       <div class="skgrp"><h3>Technical</h3><ul class="chips"><li>Python</li><li>JavaScript, HTML &amp; CSS</li><li>Computer networking basics</li><li>Capture the flag (CTF)</li><li>Data fundamentals (ICDL Big Data)</li><li>Unit testing</li></ul></div>
       <div class="skgrp"><h3>Domain knowledge</h3><ul class="chips"><li>Cybersecurity fundamentals</li><li>Safe online practices</li></ul></div>
       <div class="skgrp"><h3>Leadership &amp; communication</h3><ul class="chips"><li>Team leadership</li><li>Public speaking</li><li>Event hosting</li><li>Duty rotation planning</li><li>Teaching</li><li>Photography</li></ul></div>
-      <div class="skgrp"><h3>Self-initiated learning</h3><ul class="chips"><li>Building SG Wayfinder and Clearway</li><li>seeNTU Python course</li><li>Reading widely</li></ul></div>
+      <div class="skgrp"><h3>Self-initiated learning</h3><ul class="chips"><li>Building Clearway, SG Wayfinder, Casebook 221B, Crack the Password and Focal</li><li>seeNTU Python course</li><li>Reading widely</li></ul></div>
     </div>
   </div>
 </section>
