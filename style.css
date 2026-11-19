@@ -981,3 +981,6 @@ figcaption,figcaption span,li small,.mono small{font-size:max(.78rem,12px)}
 @media (min-width:981px){.bento.b2 .tile{grid-column:span 3}.bento.b3 .tile{grid-column:span 2}}
 @media (min-width:561px) and (max-width:980px){.bento.b2 .tile,.bento.b3 .tile{grid-column:span 1}.bento.b3 .tile:last-child{grid-column:span 2}}
 @media (max-width:560px){.bento.b2 .tile,.bento.b3 .tile{grid-column:1/-1}}
+
+.panel.hasph .pf.team{grid-column:1/-1;margin:0}
+.panel.hasph .pf.team img{width:100%;height:auto;aspect-ratio:4/3;max-height:480px;object-fit:cover;object-position:50% 55%}
