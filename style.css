@@ -994,3 +994,8 @@ figcaption,figcaption span,li small,.mono small{font-size:max(.78rem,12px)}
 
 .panel.hasph .pf.awardspic{grid-column:1/-1;margin:0}
 .panel.hasph .pf.awardspic img{width:100%;height:auto;aspect-ratio:4/3;max-height:560px;object-fit:cover;object-position:50% 55%}
+
+.mgal{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.mgal .mfig{margin:0}
+.mgal .mfig figcaption{font-size:.78rem;padding:6px 8px}
+@media (max-width:640px){.mgal{grid-template-columns:1fr}}
