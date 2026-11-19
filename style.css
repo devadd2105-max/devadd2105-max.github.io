@@ -934,3 +934,38 @@ html[data-theme="dark"] .bt-big .em{background:rgba(255,255,255,.55)}
 .bento{min-width:0}.bento .tile{min-width:0;max-width:100%}
 .bento .mini{grid-template-columns:repeat(auto-fit,minmax(0,1fr))}
 .bento .stack{flex-wrap:wrap}
+/* v16 review fixes */
+/* dock: compact labels from tablet width down, so it never overflows */
+@media (max-width:980px){
+  .dock button span{display:none}
+  .dock button[aria-current="page"] span{display:inline}
+  .dock button{padding:10px 13px}
+}
+.dock{padding-right:8px}
+/* faster fade-out of the old view so it does not show through the new one */
+.view{transition:opacity .18s var(--ease),transform .4s var(--ease),visibility 0s linear .18s}
+/* readable type floor */
+.brand small,.ibtn kbd,.tag,.pill,.stack li,.fchips b,.kstats span,.facts dt,.award small,.cc .lab,.drawer .quick button,.vf-top,.pf figcaption,.cph figcaption,.moments figcaption,.shot .ftag,.eyebrow,.kicker,.bt-roles .rcard .mono,.beyond .lab,.panel .when,.axis{font-size:max(.78rem,12px)}
+.dock button i{font-size:.75rem}
+.tl .yr,.tl time,.rail .yr,.rail small{font-size:max(.8rem,12.5px)}
+.eyebrow,.kicker{letter-spacing:.14em}
+.tag,.pill{letter-spacing:.06em}
+/* awards intro in the site's sans */
+.count{font-family:var(--sans);font-size:.95rem}
+/* About: fewer, fuller cards */
+.beyond{grid-template-columns:repeat(2,1fr)}
+@media (max-width:700px){.beyond{grid-template-columns:1fr}}
+/* Contact: tidy cards */
+.cc{min-height:0}
+.cc .row .btn{flex:1 1 auto;justify-content:center}
+.cc .row{gap:8px}
+@media (min-width:981px){.cg{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}.cc.big{grid-column:1/-1;min-height:0}}
+/* Service: card photos fill their cards, no dead space */
+#cp3 .cgrid,#cp4 .cgrid{align-items:stretch}
+#cp3 .card,#cp4 .card{height:100%}
+#cp3 .card>.cph:last-child,#cp4 .card>.cphs{margin-top:auto;padding-top:12px}
+/* Projects stat tiles */
+.bento .mini>div b{display:block}
+.bento .mini>div span{display:block;font-size:.8rem;line-height:1.3}
+.lab.mono,small,.n.mono,.mono small,.rl button span,.rl button small,.railwrap span,.tl span{font-size:max(.78rem,12px)}
+figcaption,figcaption span,li small,.mono small{font-size:max(.78rem,12px)}
