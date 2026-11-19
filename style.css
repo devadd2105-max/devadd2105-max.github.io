@@ -999,3 +999,5 @@ figcaption,figcaption span,li small,.mono small{font-size:max(.78rem,12px)}
 .mgal .mfig{margin:0}
 .mgal .mfig figcaption{font-size:.78rem;padding:6px 8px}
 @media (max-width:640px){.mgal{grid-template-columns:1fr}}
+
+@media (min-width:981px){.bento.b2 .tile:last-child:nth-child(odd){grid-column:span 6}}
