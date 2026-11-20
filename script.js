@@ -525,6 +525,29 @@
   var start = location.hash.slice(1);
   go(ORDER.indexOf(start) > -1 ? start : 'home', false);
   setTimeout(setInd, 200);
+  /* the dock pill follows the real size of the dock, even after fonts load or the label changes */
+  if (window.ResizeObserver) { var dro = new ResizeObserver(function () { requestAnimationFrame(setInd); }); dro.observe(dock); $$('button', dock).forEach(function (b) { dro.observe(b); }); }
+  window.addEventListener('load', setInd);
+
+  /* ---------- leadership: colour the roles by school stage ---------- */
+  (function stages() {
+    var ST = [{ k: 'p', from: 2016, to: 2022, name: 'Primary' }, { k: 's', from: 2022, to: 2026, name: 'Secondary' }, { k: 'j', from: 2026, to: 2027, name: 'Junior College' }];
+    var SPAN = 11; /* the bars cover 2016 to the end of 2026 */
+    function stageOf(y) { for (var i = 0; i < ST.length; i++) if (y >= ST[i].from && y < ST[i].to) return ST[i].k; return 'j'; }
+    var cut1 = (2022 - 2016) / SPAN * 100, cut2 = (2026 - 2016) / SPAN * 100;
+    $$('#rl [role="tab"]').forEach(function (t) {
+      var m = /(\d{4})/.exec(($('small', t) || {}).textContent || ''); if (!m) return;
+      var y0 = +m[1], all = ($('small', t).textContent.match(/\d{4}/g) || []), y1 = +all[all.length - 1] || y0;
+      if (/Present/i.test($('small', t).textContent)) y1 = 2026;
+      t.dataset.stage = stageOf(y0);
+      var panel = document.getElementById(t.getAttribute('aria-controls')); if (panel) panel.dataset.stage = stageOf(y0);
+      var bar = $('.trk i', t); if (!bar) return;
+      var left = parseFloat(bar.style.left), w = parseFloat(bar.style.width); if (!(w > 0)) return;
+      function loc(c) { return Math.max(0, Math.min(100, (c - left) / w * 100)); }
+      var a = loc(cut1), b = loc(cut2);
+      bar.style.background = 'linear-gradient(90deg,var(--st-p) 0 ' + a + '%,var(--st-s) ' + a + '% ' + b + '%,var(--st-j) ' + b + '% 100%)';
+    });
+  })();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(setInd);
 })();
 

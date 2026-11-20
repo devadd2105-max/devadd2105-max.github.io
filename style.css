@@ -1117,3 +1117,79 @@ button,a,.btn,.chip,[role="tab"]{touch-action:manipulation;-webkit-tap-highlight
 }
 
 @media (min-width:821px){.md .railwrap{position:sticky;top:8px;align-self:start}}
+
+/* =====================================================================
+   Stage colours: Primary, Secondary, Junior College
+   One colour per school stage, used on the timeline, the dates, the
+   year scale, the role panel and the home cards.
+   ===================================================================== */
+:root{--st-p:#0b9482;--st-s:#6d45f0;--st-j:#d79a00}
+html[data-theme="dark"]{--st-p:#2dd4bf;--st-s:#a78bfa;--st-j:#fdc500}
+[data-stage="p"],[data-s="p"]{--stc:var(--st-p)}
+[data-stage="s"],[data-s="s"]{--stc:var(--st-s)}
+[data-stage="j"],[data-s="j"]{--stc:var(--st-j)}
+
+.stagekey{display:flex;flex-wrap:wrap;gap:6px 14px;list-style:none;margin:0 0 10px;padding:0;font-size:.78rem;font-weight:600;color:var(--mu)}
+.stagekey li{display:inline-flex;align-items:center;gap:7px}
+.stagekey li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--stc);box-shadow:0 0 0 3px color-mix(in srgb,var(--stc) 25%,transparent)}
+
+/* year scale above the bars: the three years carry their stage colour, with a segmented ruler */
+.railwrap .axis{display:block;position:relative;width:96px;height:1.55rem;margin:0 15px 6px auto;font-size:.64rem}
+.railwrap .axis span{position:absolute;top:0;font-weight:700;color:var(--stc);letter-spacing:0}
+.railwrap .axis span:nth-child(1){left:0;transform:none}
+.railwrap .axis span:nth-child(2){left:54.55%;transform:translateX(-50%)}
+.railwrap .axis span:nth-child(3){left:auto;right:0;transform:none}
+.railwrap .axis .scale{position:absolute;left:0;right:0;bottom:0;height:5px;border-radius:5px;background:linear-gradient(90deg,var(--st-p) 0 54.55%,var(--st-s) 54.55% 90.91%,var(--st-j) 90.91% 100%)}
+
+/* timeline rows: title first, date under it, bar on the right */
+@media (min-width:821px){
+  .rl button{grid-template-columns:minmax(0,1fr) 96px;grid-template-areas:"t bar" "d bar";column-gap:14px;row-gap:1px;padding:9px 14px 9px 18px;box-shadow:inset 4px 0 0 var(--stc)}
+  .rl button b{grid-area:t;font-size:.95rem}
+  .rl button small{grid-area:d;color:var(--stc);font-weight:700;font-size:.72rem}
+  .rl .trk{grid-area:bar;height:8px}
+}
+@media (max-width:820px){
+  .rl button{box-shadow:inset 0 3px 0 var(--stc)}
+  .rl button small{color:var(--stc);font-weight:700}
+  .stagekey{margin-bottom:8px}
+}
+.rl .trk i{min-width:8px}
+.rl button[aria-selected="true"]{--st-p:#7ff3e2;--st-s:#e2d9ff;--st-j:#ffe066}
+.rl button[aria-selected="true"] small{color:#fff!important}
+.rl button[aria-selected="true"]{box-shadow:inset 4px 0 0 #fff}
+@media (max-width:820px){.rl button[aria-selected="true"]{box-shadow:inset 0 3px 0 #fff}}
+
+/* the open role names its stage */
+.panel[data-stage] .when{display:inline-flex;align-items:center;gap:9px;font-weight:700;color:var(--stc)}
+.panel[data-stage] .when::before{content:"";width:11px;height:11px;border-radius:50%;background:var(--stc);box-shadow:0 0 0 4px color-mix(in srgb,var(--stc) 24%,transparent)}
+.panel[data-stage="p"] .when::after{content:"Primary school";font-weight:600;color:var(--mu)}
+.panel[data-stage="s"] .when::after{content:"Secondary school";font-weight:600;color:var(--mu)}
+.panel[data-stage="j"] .when::after{content:"Junior College";font-weight:600;color:var(--mu)}
+
+/* home role cards use the same colours */
+html .rcard[data-role="0"] .mono,html .rcard[data-role="3"] .mono,html .rcard[data-role="8"] .mono{display:inline-flex;align-items:center;gap:7px;font-weight:800}
+html .rcard[data-role="0"] .mono::before,html .rcard[data-role="3"] .mono::before,html .rcard[data-role="8"] .mono::before{content:"";width:9px;height:9px;border-radius:50%;background:currentColor;flex:none}
+html .rcard[data-role="0"] .mono{color:var(--st-j)}
+html .rcard[data-role="3"] .mono{color:var(--st-s)}
+html .rcard[data-role="8"] .mono{color:var(--st-p)}
+
+/* =====================================================================
+   Dock and project cards (iPad review)
+   ===================================================================== */
+.dock{-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);background:rgba(8,18,52,.94)}
+html[data-theme="dark"] .dock{background:rgba(8,14,40,.95)}
+.app::after{content:"";position:fixed;left:0;right:0;bottom:0;height:calc(110px + env(safe-area-inset-bottom));pointer-events:none;z-index:20;background:linear-gradient(transparent,var(--bg) 82%)}
+.dock{z-index:40}
+.dock .ind{will-change:transform,width}
+.dock button{flex:none}
+
+/* no dead gap inside tall project cards: the spare room sits above the link */
+.bento .tile .stack{margin-top:14px!important}
+.bento .tile .mini{margin-bottom:0}
+.bento .tile .go{margin-top:auto;padding-top:16px}
+.railwrap .axis{width:124px}
+@media (min-width:821px){.rl button{grid-template-columns:minmax(0,1fr) 124px}}
+.railwrap .axis span{font-size:.62rem}
+.panel[data-stage] .when{display:flex;flex-wrap:wrap;gap:3px 9px;white-space:nowrap;align-items:center}
+.panel[data-stage] .when::after{flex-basis:100%;padding-left:20px}
+@media (max-width:820px){.railwrap .axis{display:none}}
