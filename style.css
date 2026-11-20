@@ -1003,3 +1003,117 @@ figcaption,figcaption span,li small,.mono small{font-size:max(.78rem,12px)}
 @media (min-width:981px){.bento.b2 .tile:last-child:nth-child(odd){grid-column:span 6}}
 
 @media (min-width:981px){.bento .t-l,.bento .t-m,.bento .t-n{grid-column:span 2}}
+
+/* =====================================================================
+   Responsive polish: iPad and phone
+   Everything below overrides earlier rules on purpose, so it stays last.
+   ===================================================================== */
+
+/* notches and home bars */
+.topbar{padding-top:env(safe-area-inset-top);height:calc(64px + env(safe-area-inset-top));padding-left:max(clamp(14px,3vw,36px),env(safe-area-inset-left));padding-right:max(clamp(14px,3vw,36px),env(safe-area-inset-right))}
+.app{inset:calc(64px + env(safe-area-inset-top)) 0 0 0}
+.dock{bottom:calc(14px + env(safe-area-inset-bottom))}
+.view{padding-bottom:calc(120px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+img,video,canvas,svg{max-width:100%}
+h1,h2,h3,p,li,figcaption{overflow-wrap:break-word}
+button,a,.btn,.chip,[role="tab"]{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+
+/* Leadership timeline: dates no longer collide with titles, years line up with the bars */
+.rl button{grid-template-columns:7.6rem minmax(0,1fr) 112px;column-gap:12px}
+.rl button small{white-space:nowrap;font-size:.74rem}
+.rl button b{min-width:0}
+.railwrap .axis{width:112px;margin:0 14px 6px auto;justify-content:space-between;letter-spacing:0;position:relative}
+.railwrap .axis span{font-size:.66rem;line-height:1;letter-spacing:0;font-variant-numeric:tabular-nums}
+.railwrap .axis span:nth-child(2){position:absolute;left:50%;transform:translateX(-50%)}
+
+/* Role photos: a tidy grid instead of full-width giants */
+.panel.hasph{grid-template-columns:minmax(0,1fr) minmax(180px,230px)}
+.panel.hasph .pf.team{grid-column:1/-1}
+@media (min-width:561px){
+  .panel.hasph>.pf:not(.team):not(:nth-of-type(1)){max-width:none}
+  .pf img{max-height:420px}
+  .pf.team img{max-height:460px}
+}
+@media (max-width:820px){
+  .panel.hasph{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .panel.hasph>.pbody{grid-column:1/-1}
+  .panel.hasph>.pf.team{grid-column:1/-1}
+  .pf img{aspect-ratio:4/3;max-height:340px}
+}
+@media (max-width:560px){
+  .panel.hasph{grid-template-columns:1fr}
+  .pf img{max-height:300px}
+}
+
+/* Home: buttons and role cards on tablets */
+@media (min-width:561px) and (max-width:1250px){
+  .actions{display:flex;flex-wrap:wrap;gap:10px}
+  .actions .btn{padding-left:18px;padding-right:18px;white-space:nowrap}
+  .hl .rcards{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .hl .rcard .mono{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
+@media (min-width:981px) and (max-width:1250px){
+  .actions{gap:8px}
+  .actions .btn{font-size:.84rem;padding:11px 13px}
+  .hl .rcard .mono{letter-spacing:.05em;font-size:.62rem}
+}
+
+/* Projects: one column on phones, a clear 2-up on iPad portrait */
+@media (min-width:561px) and (max-width:980px){
+  .bento{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bento>.tile{grid-column:span 1!important;grid-row:auto!important}
+  .bento>.tile.t-a{grid-column:1/-1!important}
+  .bento>.tile:last-child:nth-child(odd){grid-column:1/-1!important}
+}
+@media (max-width:560px){
+  .bento{grid-template-columns:minmax(0,1fr)!important;gap:12px}
+  .bento>.tile,.bento>.tile[class]{grid-column:1/-1!important;grid-row:auto!important;min-height:0;padding:18px}
+  .bento .mini{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+}
+
+/* Dock: all nine places fit on a phone, labels only on the current one */
+@media (max-width:720px){
+  .dock{gap:0;padding:5px;max-width:calc(100vw - 16px);overflow-x:auto;scrollbar-width:none}
+  .dock button{padding:10px 0;width:2.7rem;justify-content:center}
+  .dock button[aria-current="page"]{width:auto;padding:10px 14px}
+  .dock button svg{width:21px;height:21px}
+}
+@media (max-width:380px){
+  .dock button{width:2.35rem}
+  .dock button[aria-current="page"]{padding:10px 11px;font-size:.82rem}
+}
+
+/* Phone */
+@media (max-width:560px){
+  .view{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+  .vh2,h2.vh2{font-size:clamp(1.85rem,8.4vw,2.4rem);line-height:1.1}
+  .sub{font-size:1rem}
+  .actions{display:grid;grid-template-columns:1fr;gap:10px}
+  .actions .btn{justify-content:center;text-align:center;width:100%}
+  .vf-cap{flex-wrap:wrap;row-gap:4px}.vf-cap b{white-space:normal}
+  .kstats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .kstats li{border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+  .kstats li b{font-size:1.4rem}
+  .kstats li span{font-size:.78rem;line-height:1.25}
+  .card,.panel{border-radius:18px}
+  pre{overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:.78rem}
+  .code pre,.hud-body{overflow-x:auto}
+  .modal .sheet{max-height:calc(100dvh - 20px);border-radius:18px;padding:18px}
+  .modal .sheet h2,.modal .sheet h3{font-size:1.35rem}
+  .mgal{grid-template-columns:1fr}
+  .tabs,.ptabs,.chips,.fchips{gap:8px}
+  .drawer{max-height:70dvh}
+}
+@media (max-width:380px){
+  .kstats{grid-template-columns:1fr}
+  .brand span{font-size:.95rem}
+}
+
+/* Tablet portrait: keep content comfortably wide, no huge gutters */
+@media (min-width:561px) and (max-width:980px){
+  .view{padding-left:28px;padding-right:28px}
+  .wrap{max-width:none}
+}
+
+@media (min-width:821px){.md .railwrap{position:sticky;top:8px;align-self:start}}
