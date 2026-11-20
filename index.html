@@ -38,7 +38,7 @@
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="style.css?v=1795156809">
+<link rel="stylesheet" href="style.css?v=1795159584">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -253,6 +253,13 @@
         <h3>This portfolio</h3>
         <p>The site you are reading. Hand-written HTML, CSS and JavaScript with no framework and no build step, with light and dark modes, a command palette and a built-in terminal.</p>
         <ul class="stack mono"><li>HTML, CSS, JavaScript</li><li>GitHub Pages</li><li>Privacy-friendly visit counter</li></ul>
+        <span class="go">Open the case study</span>
+      </button>
+      <button type="button" class="card tile t-n" data-modal="m-flag">
+        <span class="tag mono">Security training kit · GitHub</span>
+        <h3>Flag Lab</h3>
+        <p>A capture-the-flag practice kit I wrote for my club: 26 puzzles from easy to hard across ciphers, hidden data in images and web flaws, with built-in tools and a scoreboard.</p>
+        <ul class="stack mono"><li>JavaScript (ES modules)</li><li>Python (Pillow) build script</li><li>No build step, no server</li><li>50+ tests</li></ul>
         <span class="go">Open the case study</span>
       </button>
     </div>
@@ -508,6 +515,24 @@
       </dl>
       <figure class="mfig"><img src="moments/app-site.jpg" style="width:100%;height:auto;object-fit:cover;aspect-ratio:1280/800" alt="The home page of this portfolio with a blue hero card, a photo carousel and a row of statistics" loading="lazy" decoding="async" width="1280" height="800"><figcaption>The home page of this site</figcaption></figure>
       <div class="mact"><a class="btn ghost sm" href="https://github.com/devadd2105-max/devadd2105-max.github.io" target="_blank" rel="noopener">View on GitHub</a></div>
+    </div>
+
+    <div class="more" id="m-flag" data-title="Flag Lab">
+      <span class="tag mono">Security training kit · open source</span>
+      <dl class="facts">
+        <div><dt>The idea</dt><dd>A free practice kit for capture-the-flag (CTF) competitions, made for the Infocomm Club after placing third at Cyber Sports Day. Everything runs in the browser, so a student can start with nothing to install and no account.</dd></div>
+        <div><dt>What is in it</dt><dd>26 puzzles worth 4,950 points, from 50 to 350 points each. <b>Ciphers</b>: Atbash, binary, Morse, Caesar, layered encodings, Vigenère, rail fence, XOR, substitution and affine. <b>Hidden in images</b>: file metadata, low-contrast text, data after the end of a file, bit planes and least-significant-bit messages. <b>Web flaws</b>: robots.txt, view source, URL and cookie tampering, IDOR, path traversal, SQL injection, command injection, reflected XSS and a forged login token.</dd></div>
+        <div><dt>Tools and scoring</dt><dd>A cipher workbench and an image lab sit beside the puzzles, so players learn how the techniques work, not only the answer. Hints cost points, and a result code lets a club compare scores on a leaderboard.</dd></div>
+        <div><dt>Safe by design</dt><dd>The vulnerable websites are small simulations running in a sealed sandbox, so nothing real is attacked and no puzzle can touch the player's browser. Flags are stored only as hashes, and progress stays in the player's own browser.</dd></div>
+        <div><dt>My role</dt><dd>Designed and built it, including writing every puzzle.</dd></div>
+      </dl>
+      <figure class="mfig"><img src="moments/app-flaglab.jpg" style="width:100%;height:auto;object-fit:cover;aspect-ratio:1280/900" alt="Flag Lab showing the challenge list sorted from easy to hard and a Vigenère cipher puzzle with the cipher workbench open" loading="lazy" decoding="async" width="1280" height="900"><figcaption>A cipher puzzle with the workbench open, beside the list of challenges</figcaption></figure>
+      <ul class="list">
+        <li>Each category is ordered from easy to hard, so a beginner and an experienced player can both use it.</li>
+        <li>The simulated browser has a page view, a source view and an editable cookie jar, and the SQL injection puzzle runs a small SQL parser, so it behaves like a real login query.</li>
+        <li>More than 50 automated tests solve every puzzle the way a player would, and a real browser plays through the whole kit.</li>
+      </ul>
+      <div class="mact"><a class="btn primary sm" href="https://devadd2105-max.github.io/Flag-Lab/" target="_blank" rel="noopener">Play it</a><a class="btn ghost sm" href="https://github.com/devadd2105-max/Flag-Lab" target="_blank" rel="noopener">View on GitHub</a></div>
     </div>
 
     <div class="more" id="m-chry" data-title="ChrySAlis 2026">
@@ -899,7 +924,7 @@
 <div id="rain" aria-hidden="true"><canvas id="rainc"></canvas><p>MATRIX MODE · press Esc to exit</p></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="script.js?v=1795156809" defer></script>
+<script src="script.js?v=1795159584" defer></script>
 <script data-goatcounter="https://devadarshan95.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
