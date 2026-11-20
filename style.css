@@ -1001,3 +1001,5 @@ figcaption,figcaption span,li small,.mono small{font-size:max(.78rem,12px)}
 @media (max-width:640px){.mgal{grid-template-columns:1fr}}
 
 @media (min-width:981px){.bento.b2 .tile:last-child:nth-child(odd){grid-column:span 6}}
+
+@media (min-width:981px){.bento .t-l,.bento .t-m{grid-column:span 3}}

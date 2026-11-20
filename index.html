@@ -38,7 +38,7 @@
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="style.css?v=1795082897">
+<link rel="stylesheet" href="style.css?v=1795156809">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -195,7 +195,7 @@
 <section tabindex="-1" class="view" id="projects" data-title="Projects" aria-labelledby="pr-h">
   <div class="wrap">
     <div class="head"><p class="eyebrow mono">Projects</p><h2 class="vh2" id="pr-h">Things I've <em>built</em></h2>
-    <p class="sub">Case studies, the real code behind them, and a live demo you can try. All code for my projects is public on <a href="https://github.com/devadd2105-max" target="_blank" rel="noopener">GitHub</a>.</p></div>
+    <p class="sub">Case studies, the real code behind them, and a live demo you can try. Most of my code is public on <a href="https://github.com/devadd2105-max" target="_blank" rel="noopener">GitHub</a>. I-Think is a private repository while I test it.</p></div>
     <div class="fchips tabs" role="tablist" aria-label="Project views" id="prt">
       <button type="button" role="tab" aria-selected="true" aria-controls="pp0" id="pt0">Case studies</button>
       <button type="button" role="tab" aria-selected="false" aria-controls="pp1" id="pt1">Code</button>
@@ -239,6 +239,20 @@
         <h3>Focal</h3>
         <p>A photo coach that runs in your browser. It checks framing, light, sharpness and camera settings, then draws what to fix on the picture. Your photo never leaves the page.</p>
         <ul class="stack mono"><li>JavaScript (ES modules)</li><li>Canvas image analysis</li><li>22 tests</li></ul>
+        <span class="go">Open the case study</span>
+      </button>
+      <button type="button" class="card tile t-l" data-modal="m-ithink">
+        <span class="tag mono">Remote control tool · private repository</span>
+        <h3>I-Think</h3>
+        <p>Control a Windows laptop from an iPad with no app to install. Extend your Chrome tabs onto the iPad, or mirror the whole screen and use touch to control it. Everything is encrypted end to end.</p>
+        <ul class="stack mono"><li>Python (asyncio)</li><li>JavaScript in Safari</li><li>SRP + AES-256-GCM</li><li>56 tests</li></ul>
+        <span class="go">Open the case study</span>
+      </button>
+      <button type="button" class="card tile t-m" data-modal="m-site">
+        <span class="tag mono">Website · open source</span>
+        <h3>This portfolio</h3>
+        <p>The site you are reading. Hand-written HTML, CSS and JavaScript with no framework and no build step, with light and dark modes, a command palette and a built-in terminal.</p>
+        <ul class="stack mono"><li>HTML, CSS, JavaScript</li><li>GitHub Pages</li><li>Privacy-friendly visit counter</li></ul>
         <span class="go">Open the case study</span>
       </button>
     </div>
@@ -466,6 +480,27 @@
         <li>22 automated tests, and it was checked against a set of real photos. It says openly which things it cannot judge, such as emotion and story.</li>
       </ul>
       <div class="mact"><a class="btn primary sm" href="https://devadd2105-max.github.io/Focal/" target="_blank" rel="noopener">Try it</a><a class="btn ghost sm" href="https://github.com/devadd2105-max/Focal" target="_blank" rel="noopener">View on GitHub</a></div>
+    </div>
+
+    <div class="more" id="m-ithink" data-title="I-Think">
+      <span class="tag mono">Remote control tool · private repository</span>
+      <dl class="facts">
+        <div><dt>The idea</dt><dd>Use an iPad as a window onto my Windows laptop without installing an app. The laptop runs a small Python server, and the iPad just opens a page in Safari.</dd></div>
+        <div><dt>Two modes</dt><dd><b>Tabs</b> extends my Chrome tabs onto the iPad so I can use them there. <b>Screen</b> mirrors the whole laptop screen and lets me control it by touch, with taps, drags, scrolling and typing.</dd></div>
+        <div><dt>Security first</dt><dd>The connection uses TLS with a certificate made on the laptop. The iPad pairs by typing a short code that is never sent over the network (SRP), a second layer of AES-256-GCM encryption sits on top, and the laptop asks me to approve every new device. Codes are single use and expire, wrong guesses are limited, messages are strictly checked, and nothing I do is logged.</dd></div>
+        <div><dt>Speed and quality</dt><dd>Screen mode sends only the parts of the picture that changed, captures and encodes at the same time, slows down when the iPad falls behind instead of building up delay, and sends a sharper frame when the screen goes still.</dd></div>
+        <div><dt>Status</dt><dd>It works end to end on my own laptop and iPad, and I am still tuning speed and sharpness. It has 56 automated tests, including ones that drive real browser pages. The repository is private while I test it, so there is no public code link.</dd></div>
+      </dl>
+    </div>
+
+    <div class="more" id="m-site" data-title="This portfolio">
+      <span class="tag mono">Website · open source</span>
+      <dl class="facts">
+        <div><dt>The idea</dt><dd>A portfolio that is quick to open, easy to search and shows real work, replacing the slide deck I used before.</dd></div>
+        <div><dt>How it is built</dt><dd>Plain HTML, CSS and JavaScript with no framework and no build step, hosted free on GitHub Pages. It has light and dark modes, a command palette, a built-in terminal, and a visit counter that does not track individual visitors.</dd></div>
+        <div><dt>My role</dt><dd>Designed and built it, and I keep it updated as I add projects, awards and programmes.</dd></div>
+      </dl>
+      <div class="mact"><a class="btn ghost sm" href="https://github.com/devadd2105-max/devadd2105-max.github.io" target="_blank" rel="noopener">View on GitHub</a></div>
     </div>
 
     <div class="more" id="m-chry" data-title="ChrySAlis 2026">
@@ -856,7 +891,7 @@
 <div id="rain" aria-hidden="true"><canvas id="rainc"></canvas><p>MATRIX MODE · press Esc to exit</p></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="script.js?v=1795082897" defer></script>
+<script src="script.js?v=1795156809" defer></script>
 <script data-goatcounter="https://devadarshan95.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
