@@ -463,6 +463,7 @@
   CMDS.push({ t: 'Copy photography email', h: 'copy', f: function () { copy(phMail(), 'Email copied'); } });
   CMDS.push({ t: 'Open terminal', h: '`', f: function () { termOpen(true); } });
   CMDS.push({ t: 'Run hack mode', h: 'fun', f: function () { matrix(); } });
+  window.__pxCmds = CMDS;
   function render() {
     var q = palq.value.toLowerCase().trim();
     items = CMDS.filter(function (c) { return !q || c.t.toLowerCase().indexOf(q) > -1; });

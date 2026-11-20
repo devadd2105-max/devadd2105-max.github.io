@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Page not found | Balamurugan Devadarshan</title><meta name="robots" content="noindex">
-<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(ellipse at 20% 0%,#00509D,#003F88 45%,#00296B);color:#fff;font-family:system-ui,sans-serif;text-align:center}
-h1{font-size:clamp(3rem,10vw,6rem);margin:0;color:#FDC500}p{color:#cfe0fa}a{display:inline-block;margin-top:18px;background:linear-gradient(135deg,#FDC500,#FFD500);color:#00296B;font-weight:700;padding:13px 26px;border-radius:999px;text-decoration:none}</style></head>
-<body><main><h1>404</h1><p>That page doesn't exist.</p><a href="/">Back to the portfolio</a></main></body></html>
+<meta name="theme-color" content="#060b1f"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:24px;color:#e8edff;font-family:Manrope,Inter,system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;
+background:radial-gradient(40% 36% at 15% 12%,rgba(18,54,214,.7),transparent 70%),radial-gradient(34% 30% at 88% 22%,rgba(109,69,240,.5),transparent 70%),radial-gradient(40% 34% at 70% 95%,rgba(168,123,0,.45),transparent 72%),#060b1f;overflow:hidden}
+main{position:relative;max-width:34rem}
+.frame{position:relative;display:inline-block;padding:14px 34px 6px;margin-bottom:8px}
+.frame::before,.frame::after{content:"";position:absolute;width:34px;height:34px;border:2px solid #fdc500}
+.frame::before{left:0;top:0;border-right:0;border-bottom:0;border-radius:8px 0 0 0}
+.frame::after{right:0;bottom:0;border-left:0;border-top:0;border-radius:0 0 8px 0}
+h1{margin:0;font-size:clamp(5rem,26vw,9.5rem);line-height:1;font-weight:800;letter-spacing:-.06em;background:linear-gradient(120deg,#fff,#b3c1ff 55%,#fdc500);-webkit-background-clip:text;background-clip:text;color:transparent}
+p{margin:14px auto 0;color:#b6c2ef;line-height:1.6;max-width:30ch;font-size:1.05rem}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:#8aa0ff;margin:0 0 6px}
+a{display:inline-flex;align-items:center;gap:10px;margin-top:28px;background:linear-gradient(135deg,#fdc500,#ffd84a);color:#04081c;font-weight:800;padding:14px 26px;border-radius:999px;text-decoration:none;box-shadow:0 14px 40px -10px rgba(253,197,0,.6);transition:transform .25s cubic-bezier(.22,1,.36,1)}
+a:hover{transform:translateY(-2px)}a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.logo{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin:0 auto 22px;font-weight:800;color:#fff;background:linear-gradient(135deg,#1236d6,#0e2bb0);box-shadow:0 0 0 1px rgba(255,255,255,.25) inset,0 14px 40px -8px rgba(18,54,214,.9)}
+@media (prefers-reduced-motion:reduce){a{transition:none}}
+</style></head>
+<body><main>
+<div class="logo" aria-hidden="true">BD</div>
+<p class="mono">Out of focus</p>
+<div class="frame"><h1>404</h1></div>
+<p>That page isn't here. Let's get you back to the portfolio.</p>
+<a href="/">Back to the portfolio</a>
+</main></body></html>

@@ -1,0 +1,234 @@
+/* =====================================================================
+   Devadarshan portfolio: the polish layer
+   ---------------------------------------------------------------------
+   Everything here is scoped to html.px. Remove that class (the "Classic
+   look" switch in the footer, or the command menu) and the site goes
+   back to exactly what it was. The bento layout is never touched: this
+   file only changes finish: light, depth, type, motion and detail.
+   ===================================================================== */
+
+/* ---------- 1. design tokens ---------- */
+@property --c1{syntax:"<color>";inherits:true;initial-value:#1236d6}
+@property --c2{syntax:"<color>";inherits:true;initial-value:#6d45f0}
+@property --c3{syntax:"<color>";inherits:true;initial-value:#fdc500}
+
+html.px{
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:72px;
+  --rad-s:10px;--rad-m:16px;--rad-l:24px;
+  --gold:#fdc500;
+  --ink-deep:#04081c;
+  --glass:rgba(255,255,255,.62);
+  --glass-line:rgba(18,54,214,.16);
+  --elev-1:0 1px 0 rgba(255,255,255,.7) inset,0 1px 2px rgba(10,26,92,.08),0 8px 24px -10px rgba(10,26,92,.18);
+  --elev-2:0 1px 0 rgba(255,255,255,.8) inset,0 2px 4px rgba(10,26,92,.08),0 22px 48px -18px rgba(10,26,92,.32);
+  --ring:0 0 0 2px var(--bg),0 0 0 4px #1236d6;
+  --stc-p:#06695c;--stc-s:#5b34d8;--stc-j:#7d5400;     /* stage colours as text, readable on white */
+  --spot:rgba(18,54,214,.12);
+  accent-color:#1236d6;
+  scroll-behavior:smooth;
+  tab-size:2;
+}
+html.px[data-theme="dark"]{
+  --glass:rgba(12,20,56,.62);
+  --glass-line:rgba(160,180,255,.16);
+  --elev-1:0 1px 0 rgba(255,255,255,.07) inset,0 1px 2px rgba(0,0,0,.4),0 10px 28px -12px rgba(0,0,0,.6);
+  --elev-2:0 1px 0 rgba(255,255,255,.1) inset,0 2px 6px rgba(0,0,0,.45),0 26px 56px -18px rgba(0,0,0,.75);
+  --ring:0 0 0 2px #060b1f,0 0 0 4px #fdc500;
+  --stc-p:#2dd4bf;--stc-s:#b4a0ff;--stc-j:#fdc500;
+  --spot:rgba(253,197,0,.14);
+  accent-color:#fdc500;
+}
+
+/* ---------- 2. ambient background: a slow aurora, fine grain, a faint blueprint grid ---------- */
+html.px body{
+  --c1:#c9d6ff;--c2:#e7dcff;--c3:#fff0b3;
+  transition:--c1 1.4s ease,--c2 1.4s ease,--c3 1.4s ease;
+}
+html.px[data-theme="dark"] body{--c1:#1236d6;--c2:#6d45f0;--c3:#a87b00}
+html.px[data-view="about"] body{--c1:#c3ecf0;--c2:#d4dcff;--c3:#fff0b3}
+html.px[data-view="leadership"] body{--c1:#ffe9a0;--c2:#d4dcff;--c3:#bff0e8}
+html.px[data-view="projects"] body{--c1:#c3d4ff;--c2:#b9ecf5;--c3:#e7dcff}
+html.px[data-view="programmes"] body{--c1:#e0d2ff;--c2:#c3d4ff;--c3:#ffe3b8}
+html.px[data-view="awards"] body{--c1:#ffe9a0;--c2:#ffd6c9;--c3:#d4dcff}
+html.px[data-view="credentials"] body{--c1:#bff0e8;--c2:#c3d4ff;--c3:#ffe9a0}
+html.px[data-view="photography"] body{--c1:#ffd6e3;--c2:#d4dcff;--c3:#ffe9a0}
+html.px[data-view="contact"] body{--c1:#ffe9a0;--c2:#c3d4ff;--c3:#e7dcff}
+html.px[data-theme="dark"][data-view="about"] body{--c1:#0e7490;--c2:#1236d6;--c3:#7c3aed}
+html.px[data-theme="dark"][data-view="leadership"] body{--c1:#a87b00;--c2:#1236d6;--c3:#0f766e}
+html.px[data-theme="dark"][data-view="projects"] body{--c1:#1236d6;--c2:#0e7490;--c3:#6d45f0}
+html.px[data-theme="dark"][data-view="programmes"] body{--c1:#6d45f0;--c2:#1236d6;--c3:#9a4d00}
+html.px[data-theme="dark"][data-view="awards"] body{--c1:#a87b00;--c2:#9a3412;--c3:#1236d6}
+html.px[data-theme="dark"][data-view="credentials"] body{--c1:#0f766e;--c2:#1236d6;--c3:#a87b00}
+html.px[data-theme="dark"][data-view="photography"] body{--c1:#9d174d;--c2:#1236d6;--c3:#a87b00}
+html.px[data-theme="dark"][data-view="contact"] body{--c1:#a87b00;--c2:#1236d6;--c3:#6d45f0}
+
+html.px body::before{
+  content:"";position:fixed;inset:-25%;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(38% 32% at 18% 14%,color-mix(in srgb,var(--c1) 55%,transparent),transparent 70%),
+    radial-gradient(34% 30% at 86% 22%,color-mix(in srgb,var(--c2) 48%,transparent),transparent 70%),
+    radial-gradient(40% 34% at 68% 92%,color-mix(in srgb,var(--c3) 36%,transparent),transparent 72%);
+  animation:pxDrift 48s ease-in-out infinite alternate;
+  will-change:transform;
+}
+html.px[data-theme="dark"] body::before{opacity:.9}
+html.px body::after{
+  content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5;
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode:soft-light;
+}
+html.px[data-theme="dark"] body::after{opacity:.35;mix-blend-mode:overlay}
+@keyframes pxDrift{
+  0%{transform:translate3d(-2%,-1%,0) rotate(0deg) scale(1)}
+  50%{transform:translate3d(2%,2%,0) rotate(4deg) scale(1.06)}
+  100%{transform:translate3d(-1%,3%,0) rotate(-3deg) scale(1.02)}
+}
+html.px.lite body::before{animation:none}
+
+/* ---------- 3. type ---------- */
+html.px body{font-feature-settings:"ss01","cv11","kern","liga";text-rendering:optimizeLegibility}
+html.px h1,html.px h2,html.px h3{text-wrap:balance;font-optical-sizing:auto}
+html.px p,html.px li,html.px dd{text-wrap:pretty}
+html.px h1.name{letter-spacing:-.045em;line-height:.98;font-weight:800}
+html.px .vh2{letter-spacing:-.04em;font-weight:800;line-height:1.04}
+html.px h3{letter-spacing:-.022em}
+html.px .eyebrow{letter-spacing:.2em}
+html.px .eyebrow::before{box-shadow:0 0 14px color-mix(in srgb,var(--gold) 70%,transparent)}
+html.px .kstats b,html.px .metrics b,html.px .cstats b,html.px .mini b,html.px .kn b{font-variant-numeric:tabular-nums lining-nums;letter-spacing:-.03em}
+html.px ::selection{background:color-mix(in srgb,var(--gold) 70%,transparent);color:#04081c}
+html.px .sub,html.px .lead{max-width:62ch}
+
+/* ---------- 4. surfaces: hairline light, soft depth, a spotlight that follows the pointer ---------- */
+html.px .card{
+  box-shadow:var(--elev-1);
+  transition:border-color .25s,box-shadow .35s var(--ease-out),transform .35s var(--ease-out),background-color .25s;
+  -webkit-backdrop-filter:saturate(1.15);backdrop-filter:saturate(1.15);
+}
+html.px .card::before{
+  display:block!important;border-radius:inherit;transition:opacity .3s;
+  background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),var(--spot),transparent 70%)!important;
+}
+@media (hover:hover){
+  html.px .tile:hover,html.px .rcard:hover,html.px .award:hover{transform:translateY(-3px);box-shadow:var(--elev-2)}
+  html.px .card:hover{border-color:color-mix(in srgb,var(--gold) 55%,transparent)}
+}
+html.px .tile:active,html.px .rcard:active,html.px .btn:active,html.px .chips button:active,html.px [role="tab"]:active{transform:scale(.985)}
+html.px .modal .sheet{box-shadow:var(--elev-2),0 0 0 1px var(--glass-line);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+html.px .modal{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+html.px img{image-rendering:auto}
+html.px .mfig img,html.px .pf img,html.px .cph img,html.px .masonry img,html.px .shot img{transition:transform .8s var(--ease-out),filter .5s}
+@media (hover:hover){
+  html.px .mfig:hover img,html.px .pf:hover img,html.px .cph:hover img,html.px .masonry figure:hover img,html.px .shot:hover img{transform:scale(1.035);filter:saturate(1.08) contrast(1.02)}
+}
+
+/* ---------- 5. buttons ---------- */
+html.px .btn{position:relative;overflow:hidden;isolation:isolate;transition:transform .25s var(--ease-out),box-shadow .3s,background-color .25s,color .25s,border-color .25s}
+html.px .btn.primary::after{
+  content:"";position:absolute;inset:0;z-index:-1;transform:translateX(-120%) skewX(-18deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transition:transform .8s var(--ease-out);
+}
+@media (hover:hover){html.px .btn.primary:hover::after{transform:translateX(120%) skewX(-18deg)}html.px .btn:hover{transform:translateY(-2px)}}
+html.px .btn.ghost{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+html.px :focus-visible{outline:none;box-shadow:var(--ring)!important;border-radius:inherit}
+html.px .skip{background:#fdc500;color:#04081c;font-weight:800;border-radius:0 0 14px 14px;padding:12px 18px}
+
+/* ---------- 6. top bar, progress ruler, dock ---------- */
+html.px .topbar{transition:background-color .35s,box-shadow .35s,-webkit-backdrop-filter .35s,backdrop-filter .35s}
+html.px .topbar.scrolled{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 1px 0 var(--glass-line)}
+html.px .brand .logo{box-shadow:0 0 0 1px rgba(255,255,255,.25) inset,0 8px 24px -6px color-mix(in srgb,var(--gold) 55%,transparent);position:relative;overflow:hidden}
+html.px .brand .logo::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);transform:translateX(-120%);animation:pxGlint 7s 2s infinite}
+@keyframes pxGlint{0%,88%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+html.px .ibtn{-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:var(--elev-1)}
+html.px .px-progress{position:fixed;left:0;right:0;top:calc(64px + env(safe-area-inset-top));height:2px;z-index:31;pointer-events:none;transform-origin:left;transform:scaleX(var(--sp,0));background:linear-gradient(90deg,var(--st-p,#2dd4bf),var(--st-s,#a78bfa) 55%,var(--gold));opacity:var(--spo,0);transition:opacity .3s;box-shadow:0 0 12px color-mix(in srgb,var(--gold) 70%,transparent)}
+html.px .dock{box-shadow:var(--elev-2),0 0 0 1px var(--glass-line) inset;border-color:var(--glass-line)}
+html.px .dock .ind{box-shadow:0 8px 26px -4px color-mix(in srgb,var(--gold) 70%,transparent),0 1px 0 rgba(255,255,255,.5) inset}
+@media (hover:hover) and (min-width:721px){
+  html.px .dock button:not([aria-current="page"])::after{
+    content:attr(aria-label);position:absolute;left:50%;bottom:calc(100% + 14px);transform:translate(-50%,6px);
+    padding:6px 10px;border-radius:9px;font-size:.74rem;font-weight:700;letter-spacing:.01em;white-space:nowrap;pointer-events:none;
+    background:var(--ink-deep);color:#fff;opacity:0;transition:opacity .2s,transform .25s var(--ease-out);box-shadow:var(--elev-2)}
+  html.px .dock button:not([aria-current="page"]):hover::after{opacity:1;transform:translate(-50%,0)}
+}
+
+/* ---------- 7. one orchestrated entrance per view ---------- */
+@keyframes pxIn{from{opacity:0;translate:0 18px;filter:blur(6px)}to{opacity:1;translate:none;filter:none}}
+html.px .view.active:not(#home) .wrap>*{animation:pxIn .75s var(--ease-out) backwards}
+html.px .view.active:not(#home) .wrap>*:nth-child(2){animation-delay:.06s}
+html.px .view.active:not(#home) .wrap>*:nth-child(3){animation-delay:.12s}
+html.px .view.active:not(#home) .wrap>*:nth-child(4){animation-delay:.18s}
+html.px .view.active:not(#home) .wrap>*:nth-child(5){animation-delay:.24s}
+html.px .view.active:not(#home) .wrap>*:nth-child(n+6){animation-delay:.3s}
+
+/* ---------- 8. stage colours as readable text ---------- */
+html.px .rl button small,html.px .railwrap .axis span,html.px .panel[data-stage] .when{color:var(--stc)}
+html.px [data-stage="p"],html.px [data-s="p"]{--stc:var(--stc-p)}
+html.px [data-stage="s"],html.px [data-s="s"]{--stc:var(--stc-s)}
+html.px [data-stage="j"],html.px [data-s="j"]{--stc:var(--stc-j)}
+html.px .stagekey li::before{background:var(--stc)}
+html.px .rl button[aria-selected="true"]{--stc:#fff}
+html.px .rl button[data-stage]{--sc-bar:var(--stc)}
+
+/* ---------- 9. back to top, cursor halo, splash, footer ---------- */
+html.px .px-top{
+  position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(86px + env(safe-area-inset-bottom));z-index:38;
+  width:46px;height:46px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--glass-line);
+  background:var(--glass);color:var(--tx);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:var(--elev-2);
+  opacity:0;pointer-events:none;transform:translateY(12px) scale(.9);transition:opacity .3s,transform .4s var(--ease-spring);cursor:pointer}
+html.px .px-top.on{opacity:1;pointer-events:auto;transform:none}
+html.px .px-top svg{width:20px;height:20px}
+@media (hover:hover){html.px .px-top:hover{background:var(--gold);color:#04081c;border-color:transparent}}
+
+html.px .px-halo{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;z-index:90;pointer-events:none;
+  border:1.5px solid color-mix(in srgb,var(--gold) 80%,transparent);opacity:0;transition:opacity .3s,width .3s var(--ease-out),height .3s var(--ease-out),margin .3s var(--ease-out),background-color .3s;mix-blend-mode:difference}
+html.px .px-halo.on{opacity:.9}
+html.px .px-halo.hot{width:58px;height:58px;margin:-29px 0 0 -29px;background:color-mix(in srgb,var(--gold) 22%,transparent)}
+@media (hover:none),(pointer:coarse){html.px .px-halo{display:none}}
+
+html.px .px-splash{position:fixed;inset:0;z-index:200;display:grid;place-items:center;background:var(--ink-deep);color:#fff;transition:opacity .6s var(--ease-out),visibility 0s .6s}
+html.px .px-splash.gone{opacity:0;visibility:hidden;pointer-events:none}
+html.px .px-splash .mark{display:grid;gap:14px;justify-items:center;animation:pxIn .7s var(--ease-out) backwards}
+html.px .px-splash .bd{width:76px;height:76px;border-radius:22px;display:grid;place-items:center;font:800 1.7rem/1 var(--sans);letter-spacing:-.02em;color:#fff;background:linear-gradient(135deg,#1236d6,#0e2bb0);box-shadow:0 0 0 1px rgba(255,255,255,.25) inset,0 20px 60px -10px rgba(18,54,214,.9)}
+html.px .px-splash .nm{font:600 .8rem var(--mono);letter-spacing:.34em;text-transform:uppercase;color:#b3c1ff}
+html.px .px-splash .bar{width:120px;height:2px;border-radius:2px;background:rgba(255,255,255,.14);overflow:hidden}
+html.px .px-splash .bar i{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#2dd4bf,#a78bfa,#fdc500);animation:pxBar .9s var(--ease-out) forwards}
+@keyframes pxBar{to{transform:scaleX(1)}}
+
+html.px .px-foot{margin:var(--s8) 0 var(--s5);padding-top:var(--s5);border-top:1px solid var(--glass-line);display:grid;gap:var(--s4);color:var(--mu);font-size:.88rem}
+html.px .px-foot .row{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
+html.px .px-foot b{color:var(--tx);letter-spacing:-.01em}
+html.px .px-foot .acts{display:flex;flex-wrap:wrap;gap:8px}
+html.px .px-foot button{font:inherit;font-weight:700;border-radius:999px;padding:9px 16px;border:1px solid var(--glass-line);background:var(--glass);color:var(--tx);cursor:pointer;transition:background-color .2s,transform .2s var(--ease-out)}
+html.px .px-foot button:hover{background:var(--gold);color:#04081c}
+html.px .px-foot kbd{font-family:var(--mono);font-size:.78rem;padding:2px 7px;border-radius:7px;border:1px solid var(--glass-line);background:var(--glass)}
+
+/* ---------- 10. comfort, access, contrast ---------- */
+@media (pointer:coarse){
+  html.px button,html.px [role="tab"],html.px .btn,html.px .ibtn,html.px .chips li{min-height:44px}
+  html.px .dock button{min-height:44px;min-width:44px}
+}
+@media (prefers-reduced-motion:reduce){
+  html.px *,html.px *::before,html.px *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  html.px body::before{animation:none}
+  html.px .px-splash,html.px .px-halo{display:none}
+}
+@media (prefers-contrast:more){
+  html.px{--glass-line:rgba(0,0,0,.55)}
+  html.px[data-theme="dark"]{--glass-line:rgba(255,255,255,.6)}
+  html.px body::after{display:none}
+}
+@media (forced-colors:active){html.px body::before,html.px body::after,html.px .px-halo{display:none}}
+@media print{html.px body::before,html.px body::after,html.px .px-splash,html.px .px-top,html.px .px-halo,html.px .dock{display:none!important}}
+
+/* ---------- 11. the portrait: framed like a lens, with a gold focus corner ---------- */
+html.px .portrait{border-radius:var(--rad-l)}
+html.px .portrait img{border-radius:calc(var(--rad-l) - 1px) calc(var(--rad-l) - 1px) 0 0;transition:transform 1s var(--ease-out)}
+html.px .portrait::after{content:"";position:absolute;left:14px;top:14px;width:26px;height:26px;border-left:2px solid var(--gold);border-top:2px solid var(--gold);border-radius:6px 0 0 0;pointer-events:none;opacity:.9}
+@media (min-width:561px) and (max-width:980px){html.px .portrait img{border-radius:calc(var(--rad-l) - 1px) 0 0 calc(var(--rad-l) - 1px)}}
+html.px .rcard[data-role="0"] .mono,html.px .rcard[data-role="3"] .mono,html.px .rcard[data-role="8"] .mono{align-items:flex-start;line-height:1.25}
+html.px .rcard[data-role="0"] .mono::before,html.px .rcard[data-role="3"] .mono::before,html.px .rcard[data-role="8"] .mono::before{margin-top:.28em}
+html.px .rcard[data-role="0"] .mono{color:var(--stc-j)}
+html.px .rcard[data-role="3"] .mono{color:var(--stc-s)}
+html.px .rcard[data-role="8"] .mono{color:var(--stc-p)}
