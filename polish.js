@@ -78,3 +78,16 @@ m.style.setProperty('--rh',best.H+'px');m.classList.toggle('pad',best.fill<.75);
 fit();addEventListener('resize',function(){fit()});
 new MutationObserver(function(){if(!busy)fit()}).observe(m,{subtree:true,attributes:true,attributeFilter:['hidden']});
 var v=m.closest('.view');if(v)new MutationObserver(function(){fit()}).observe(v,{attributes:true,attributeFilter:['class']});})();
+
+/* accent picker */
+(function(){var P=[['royal','Royal','#1236d6','18,54,214','#fdc500','253,197,0'],['emerald','Emerald','#0a7a55','10,122,85','#ffd166','255,209,102'],['violet','Violet','#6d28d9','109,40,217','#fbbf24','251,191,36'],['crimson','Crimson','#c81d3a','200,29,58','#ffd166','255,209,102'],['teal','Teal','#0e7490','14,116,144','#fb923c','251,146,60'],['rose','Rose','#be185d','190,24,93','#fcd34d','252,211,77'],['slate','Slate','#334155','51,65,85','#38bdf8','56,189,248'],['amber','Amber','#b45309','180,83,9','#fde68a','253,230,138']];
+var btn=document.getElementById('accBtn'),pop=document.getElementById('accPop'),grid=document.getElementById('accGrid'),nm=document.getElementById('accName');if(!btn||!pop||!grid)return;
+var st=document.documentElement.style,cur='royal';try{cur=localStorage.getItem('accent')||'royal'}catch(e){}
+function apply(k){var c=P.filter(function(x){return x[0]===k})[0]||P[0];st.setProperty('--brand',c[2]);st.setProperty('--brand-rgb',c[3]);st.setProperty('--pop',c[4]);st.setProperty('--pop-rgb',c[5]);st.setProperty('--c1',c[2]);st.setProperty('--c3',c[4]);cur=c[0];nm.textContent=c[1];[].forEach.call(grid.children,function(b){b.setAttribute('aria-pressed',b.dataset.k===cur)});try{localStorage.setItem('accent',cur)}catch(e){}}
+P.forEach(function(c){var b=document.createElement('button');b.type='button';b.className='acc-sw';b.dataset.k=c[0];b.style.setProperty('--a',c[2]);b.style.setProperty('--b',c[4]);b.setAttribute('aria-label',c[1]);b.setAttribute('aria-pressed','false');grid.appendChild(b)});
+apply(cur);
+function open(o){pop.classList.toggle('on',o);btn.setAttribute('aria-expanded',o)}
+btn.addEventListener('click',function(e){e.stopPropagation();open(!pop.classList.contains('on'))});
+grid.addEventListener('click',function(e){var b=e.target.closest('.acc-sw');if(b)apply(b.dataset.k)});
+document.addEventListener('click',function(e){if(!pop.contains(e.target))open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&pop.classList.contains('on')){open(false);btn.focus()}});})();
