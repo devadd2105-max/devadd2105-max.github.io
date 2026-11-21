@@ -1219,3 +1219,13 @@ html[data-theme="dark"] .dock{background:rgba(8,14,40,.95)}
 .panel[data-multi="sj"] .when{color:var(--st-s)}
 .panel[data-multi="sj"] .when::after{content:"Secondary school and Junior College"}
 .panel[data-multi="psj"] .when::after{content:"Primary, Secondary and Junior College"}
+
+/* awards without a podium place carry an emoji; the top honours get a gold ring */
+.medal.e{font-size:1.45rem;line-height:1;background:rgba(253,197,0,.12)}
+.medal.e.x{background:radial-gradient(circle at 30% 25%,#fff1a8,#FDC500 60%,#c99700);border:0;box-shadow:inset 0 -4px 8px rgba(0,0,0,.22),0 0 0 3px rgba(253,197,0,.28),0 8px 22px rgba(253,197,0,.35)}
+.award.prime{border-color:rgba(253,197,0,.7);background:linear-gradient(135deg,rgba(253,197,0,.14),transparent 60%),var(--card,transparent)}
+.award .top{display:inline-block;margin-top:6px;padding:2px 9px;border-radius:999px;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;background:#FDC500;color:#2b1d00}
+.award.prime small+.top{margin-left:8px}
+html .medal.e.x{background:radial-gradient(circle at 30% 25%,#fff1a8,#FDC500 60%,#c99700)!important;border:0!important}
+.award.prime small+.top{margin-left:0}
+.award .top{display:block;width:max-content}
