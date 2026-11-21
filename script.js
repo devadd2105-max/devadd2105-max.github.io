@@ -541,6 +541,16 @@
       var y0 = +m[1], all = ($('small', t).textContent.match(/\d{4}/g) || []), y1 = +all[all.length - 1] || y0;
       if (/Present/i.test($('small', t).textContent)) y1 = 2026;
       t.dataset.stage = stageOf(y0);
+      /* a role that runs across more than one school stage carries each stage's colour */
+      var order = ['p', 's', 'j'], span = order.slice(order.indexOf(stageOf(y0)), order.indexOf(stageOf(y1)) + 1);
+      if (span.length > 1) {
+        var n = span.length, edge = span.map(function (k, i) { return 'var(--st-' + k + ') ' + (i * 100 / n) + '% ' + ((i + 1) * 100 / n) + '%'; }).join(',');
+        t.dataset.multi = span.join('');
+        t.style.setProperty('--edge-v', 'linear-gradient(180deg,' + edge + ')');
+        t.style.setProperty('--edge-h', 'linear-gradient(90deg,' + edge + ')');
+        var pn = document.getElementById(t.getAttribute('aria-controls'));
+        if (pn) { pn.dataset.multi = span.join(''); pn.style.setProperty('--edge-h', 'linear-gradient(90deg,' + edge + ')'); }
+      }
       var panel = document.getElementById(t.getAttribute('aria-controls')); if (panel) panel.dataset.stage = stageOf(y0);
       var bar = $('.trk i', t); if (!bar) return;
       var left = parseFloat(bar.style.left), w = parseFloat(bar.style.width); if (!(w > 0)) return;
