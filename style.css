@@ -364,7 +364,7 @@ h1.name .b{background:linear-gradient(100deg,var(--y) 10%,var(--y2) 45%,#fff3b0 
 .vf.run .focus{animation:focus 4.2s infinite}
 @keyframes focus{0%,8%{opacity:0;transform:scale(1.6)}18%{opacity:1;transform:scale(1)}40%{opacity:1}55%,100%{opacity:0}}
 .vf-top{position:absolute;z-index:4;top:16px;left:44px;right:44px;display:flex;gap:6px;align-items:center;font-size:.72rem;color:#fff;text-shadow:0 1px 6px #000}
-.vf-top b{color:var(--y)}.vf-top em{font-style:normal;margin-left:auto;color:var(--y2);letter-spacing:.08em;text-transform:uppercase}
+.vf-top b{color:#fdc500}.vf-top em{font-style:normal;margin-left:auto;color:var(--y2);letter-spacing:.08em;text-transform:uppercase}
 .vf-cap{position:absolute;z-index:4;left:0;right:0;bottom:0;padding:34px 18px 18px;background:linear-gradient(transparent,rgba(0,20,60,.92));display:flex;justify-content:space-between;align-items:end;gap:10px;font-size:.9rem}
 .vf-cap a{font-size:.78rem;color:var(--y2)}.vf-cap a:hover{color:#fff}
 .vf-bar{position:absolute;z-index:5;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.12)}
@@ -1231,3 +1231,8 @@ html .medal.e.x{background:radial-gradient(circle at 30% 25%,#fff1a8,#FDC500 60%
 .award .top{display:block;width:max-content}
 
 .panel[data-multi="psj"] .when{color:var(--st-s)}
+
+/* hero counter stays readable on bright photos */
+.vf-top{display:inline-flex;align-items:center;gap:8px;width:max-content;padding:5px 12px;border-radius:999px;background:rgba(0,12,40,.62);color:#fff;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);text-shadow:none}
+.vf-top b{color:#fdc500}
+.vf-top em{font-style:normal;color:#fff}
