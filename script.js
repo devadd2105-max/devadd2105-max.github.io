@@ -171,7 +171,7 @@
       pend = e; if (pend._q) return; pend._q = true;
       requestAnimationFrame(function () {
         var ev = pend; if (!ev) return;
-        if (!TOUCH && !RM) {
+        if (false) {
           var t = ev.target.closest && ev.target.closest('.vf-frame');
           if (t) { var b = t.getBoundingClientRect(), px = (ev.clientX - b.left) / b.width - .5, py = (ev.clientY - b.top) / b.height - .5; t.style.setProperty('--ry', (px * 8).toFixed(2) + 'deg'); t.style.setProperty('--rx', (-py * 8).toFixed(2) + 'deg'); }
           var m = ev.target.closest && ev.target.closest('.mag');
@@ -284,9 +284,12 @@
   (function () {
     var imgs = $$('#vf .vfi'); if (imgs.length < 2) return;
     var i = 0, t = null, bar = $('#vfb'), n = $('#vfn'), l = $('#vfl'), tt = $('#vft'), D = 4200;
+    var bd = $('#vfbd'), vc = $('#vfc'); if (vc) vc.textContent = '0' + imgs.length;
+    function backdrop() { if (bd) bd.style.backgroundImage = 'url("' + imgs[i].getAttribute('src') + '")'; }
+    backdrop();
     function show(k) {
       imgs[i].classList.remove('on'); i = k % imgs.length; imgs[i].classList.add('on');
-      n.textContent = '0' + (i + 1); l.textContent = imgs[i].dataset.l; tt.textContent = imgs[i].dataset.t;
+      n.textContent = '0' + (i + 1); backdrop(); l.textContent = imgs[i].dataset.l; tt.textContent = imgs[i].dataset.t;
       var ca = document.querySelector('#vf .vf-cap a'), g = imgs[i].dataset.go || 'photography';
       if (ca) { ca.setAttribute('href', '#' + g); ca.setAttribute('data-go', g); ca.innerHTML = (imgs[i].dataset.link || 'Open the gallery') + ' &rarr;'; }
       bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = '';

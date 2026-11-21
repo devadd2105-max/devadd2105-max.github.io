@@ -274,3 +274,18 @@ html.px .moments img{height:96px}
 /* ---------- 13. no animation or transition runs in a page you are not looking at ---------- */
 html.px .view:not(.active) *,html.px .view:not(.active) *::before,html.px .view:not(.active) *::after{animation:none!important;transition:none!important}
 html.px .brand .logo::after{display:none}
+
+/* ---------- 14. hero widget: every picture is shown whole, on its own blurred backdrop; caption sits below the picture ---------- */
+.vf-bd{position:absolute;inset:-24px;background-size:cover;background-position:center;z-index:0;opacity:.35}
+html.px .vf-frame{display:block}
+html.px .vfi{z-index:1;inset:0 0 58px 0!important;width:100%!important;height:calc(100% - 58px)!important;object-fit:contain!important;object-position:50% 50%!important;background:none!important;padding:0}
+html.px .vfi.app{padding:6px}
+html.px .vf-cap{z-index:4;padding:0 18px;height:58px;align-items:center;background:rgba(5,12,40,.9)!important}
+html.px .vf-top{top:12px;left:44px;right:44px;background:rgba(0,12,40,.7)}
+html.px .vf-bar{bottom:58px;z-index:5}
+html.px .vf-cap b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+
+/* §15 no filters/3D on hot paths */
+html.px .vf-frame,html.px .vf-frame.tilt{transform:none!important;transition:none!important}
+html.px .mfig:hover img,html.px .pf:hover img,html.px .cph:hover img,html.px .masonry figure:hover img,html.px .shot:hover img{transform:none!important;filter:none!important}
+html.px img{transition:none!important}
