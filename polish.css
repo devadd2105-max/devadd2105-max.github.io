@@ -263,3 +263,14 @@ html.px .about .portrait img{width:112px;height:112px;aspect-ratio:1/1;object-fi
 html.px .about .portrait figcaption{padding:12px 18px}
 html.px .about .portrait::after{display:none}
 @media (max-width:560px){html.px .about .portrait{grid-template-columns:88px 1fr}html.px .about .portrait img{width:88px;height:88px}}
+
+/* ---------- 12. awards: certificate and photos stay at the top, but compact so the top honours sit just below ---------- */
+html.px .certfeat{grid-template-columns:220px minmax(0,1fr);gap:20px;padding:14px;margin-bottom:12px}
+html.px .certfeat .cf-img img{max-height:170px;width:100%;object-fit:cover;object-position:50% 30%}
+html.px .certfeat .cf-txt p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+html.px .moments img{height:96px}
+@media (max-width:720px){html.px .certfeat{grid-template-columns:1fr}html.px .certfeat .cf-img img{max-height:150px}}
+
+/* ---------- 13. no animation or transition runs in a page you are not looking at ---------- */
+html.px .view:not(.active) *,html.px .view:not(.active) *::before,html.px .view:not(.active) *::after{animation:none!important;transition:none!important}
+html.px .brand .logo::after{display:none}
