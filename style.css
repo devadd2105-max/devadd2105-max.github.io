@@ -1229,3 +1229,5 @@ html[data-theme="dark"] .dock{background:rgba(8,14,40,.95)}
 html .medal.e.x{background:radial-gradient(circle at 30% 25%,#fff1a8,#FDC500 60%,#c99700)!important;border:0!important}
 .award.prime small+.top{margin-left:0}
 .award .top{display:block;width:max-content}
+
+.panel[data-multi="psj"] .when{color:var(--st-s)}

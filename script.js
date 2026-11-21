@@ -543,6 +543,7 @@
       t.dataset.stage = stageOf(y0);
       /* a role that runs across more than one school stage carries each stage's colour */
       var order = ['p', 's', 'j'], span = order.slice(order.indexOf(stageOf(y0)), order.indexOf(stageOf(y1)) + 1);
+      if (t.id === 'lt2') span = ['p', 's', 'j']; /* class roles run through all three stages */
       if (span.length > 1) {
         var n = span.length, edge = span.map(function (k, i) { return 'var(--st-' + k + ') ' + (i * 100 / n) + '% ' + ((i + 1) * 100 / n) + '%'; }).join(',');
         t.dataset.multi = span.join('');
