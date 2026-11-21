@@ -66,3 +66,15 @@
   }
 
 })();
+(function(){document.querySelectorAll('#masonry .shot img').forEach(function(i){var w=+i.getAttribute('width'),h=+i.getAttribute('height');if(w&&h)i.closest('.shot').style.setProperty('--ar',(w/h).toFixed(4));});})();
+
+/* photography: pick a row height so the last row fills the width */
+(function(){var m=document.getElementById('masonry');if(!m)return;var busy=0;
+function fit(){busy=1;var shots=[].slice.call(m.querySelectorAll('.shot')).filter(function(s){return !s.hidden});var W=m.clientWidth;if(!W||!shots.length){busy=0;return}
+var g=W<700?8:12,lo=W<700?95:170,hi=W<700?(shots.length<=6?260:170):(shots.length<=6?520:300),ars=shots.map(function(s){return parseFloat(s.style.getPropertyValue('--ar'))||1.2}),best=null;
+for(var H=lo;H<=hi;H+=2){var sum=0,n=0,rows=[];ars.forEach(function(a){var w=a*H;if(n&&sum+g*n+w>W){rows.push(sum+g*(n-1));sum=0;n=0}sum+=w;n++});var last=sum+g*(n-1),fill=last/W;
+var penalty=Math.abs(1-fill)+(rows.length?0:0)+Math.abs(H-(lo+hi)/2)/1000;if(fill>1)penalty+=1;if(!best||penalty<best.p)best={p:penalty,H:H,fill:fill}}
+m.style.setProperty('--rh',best.H+'px');m.classList.toggle('pad',best.fill<.75);setTimeout(function(){busy=0},0)}
+fit();addEventListener('resize',function(){fit()});
+new MutationObserver(function(){if(!busy)fit()}).observe(m,{subtree:true,attributes:true,attributeFilter:['hidden']});
+var v=m.closest('.view');if(v)new MutationObserver(function(){fit()}).observe(v,{attributes:true,attributeFilter:['class']});})();

@@ -292,3 +292,11 @@ html.px img{transition:none!important}
 /* §16 hero backdrop: calm gradient instead of a ghost copy of the photo */
 html.px .vf-bd{background-image:none!important;background:radial-gradient(120% 90% at 50% 40%,#16307a 0%,#0a1740 60%,#050c28 100%)!important;opacity:1}
 html.px .vfi.on[data-l="Me"]{background:none!important}
+/* §17 photography: justified rows, equal edges, no cropping, no ragged column ends */
+html.px .masonry{display:flex;flex-wrap:wrap;gap:12px;columns:auto!important}
+html.px .masonry .shot{margin:0!important;display:block;position:relative;overflow:hidden;min-width:0;--ar:1.2;aspect-ratio:var(--ar);flex:calc(var(--ar)*100) 1 calc(var(--ar)*var(--rh,230px));break-inside:auto}
+html.px .masonry .shot[hidden]{display:none!important}
+html.px .masonry .shot a{display:block;width:100%;height:100%}
+html.px .masonry .shot img{width:100%;height:100%;object-fit:cover;display:block}
+html.px .masonry.pad::after{content:"";flex:1000 1 0}
+@media(max-width:700px){html.px .masonry{gap:8px}html.px .masonry .shot{--rh:130px}}
