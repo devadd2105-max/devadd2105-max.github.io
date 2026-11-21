@@ -315,3 +315,39 @@ html[data-theme="dark"] .acc-pop{background:#0b1334;color:#fff;border-color:rgba
 .acc-name{margin:10px 0 0;font-size:.82rem;font-weight:600}
 @media(max-width:700px){.acc-pop{position:fixed;top:68px;right:10px;left:10px;min-width:0}}
 .acc-sw{max-width:48px;justify-self:center}
+
+/* §19 contact form, live strip, printable CV */
+.cform{margin-top:18px;max-width:640px}
+.cform h3{margin:0 0 12px}
+.cform form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cform label{display:grid;gap:6px;font-size:.82rem;font-weight:600}
+.cform .full,.cform .row,.cform .fmsg{grid-column:1/-1}
+.cform input,.cform textarea{font:inherit;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg,#fff);color:inherit;min-width:0}
+.cform input:focus-visible,.cform textarea:focus-visible{outline:2px solid var(--brand,#1236d6);outline-offset:1px}
+.cform .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.cform .row{display:flex;gap:10px;flex-wrap:wrap}
+.fmsg{margin:0;font-size:.85rem;min-height:1.2em}
+.fmsg.ok{color:#0a7a55}.fmsg.err{color:#c81d3a}
+@media(max-width:700px){.cform form{grid-template-columns:1fr}}
+.live{display:inline-flex;align-items:center;gap:8px;margin:10px 0 0;font-size:.78rem;opacity:.85}
+.live[hidden]{display:none}
+#cvdoc{display:none}
+@media print{
+  body.cvp>*:not(#cvdoc){display:none!important}
+  body.cvp #cvdoc{display:block!important;color:#111;background:#fff;font:10pt/1.4 "Manrope",Arial,sans-serif}
+  body.cvp #cvdoc h1{font-size:20pt;margin:0 0 2pt}
+  body.cvp #cvdoc h2{font-size:10.5pt;margin:10pt 0 3pt;padding-bottom:2pt;border-bottom:1px solid #999;text-transform:none}
+  body.cvp #cvdoc ul{margin:0;padding-left:14pt}body.cvp #cvdoc li{margin:0 0 2pt}
+  body.cvp #cvdoc p{margin:2pt 0}body.cvp #cvdoc .cvl{color:#444}
+  @page{size:A4;margin:14mm}
+}
+.cform{padding:20px 22px}
+@media print{
+  html,body.cvp{background:#fff!important;color:#111!important}
+  body.cvp #cvdoc,body.cvp #cvdoc *{color:#111!important;-webkit-text-fill-color:#111!important;background:none!important;text-shadow:none!important}
+  body.cvp #cvdoc .cvl{color:#444!important;-webkit-text-fill-color:#444!important}
+  body.cvp #cvdoc h1{font-size:20pt;letter-spacing:0}
+  body.cvp::before,body.cvp::after,html.px body.cvp::before,html.px body.cvp::after{display:none!important}
+}
+@media print{html,html.px,html[data-theme],html.px[data-theme]{background:#fff!important}}
+@media print{html,html[data-theme]{color-scheme:light!important}}

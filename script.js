@@ -402,6 +402,8 @@
       if (!parts[1]) { line('Challenge (Caesar shift 3): GHYD{HOHPHQWDUB}\nDecode it, then run: ctf <answer>'); return; }
       if (parts.slice(1).join('').toUpperCase() === 'DEVA{ELEMENTARY}') line('Flag captured: DEVA{ELEMENTARY}. Elementary, my dear reader.'); else line('Not quite. Shift each letter back by 3.', 'e'); return;
     }
+    if (lc === 'sudo' || lc.indexOf('sudo ') === 0) { line('Nice try. This user is not in the sudoers file. This incident will be reported (to nobody).', 'e'); return; }
+    if (lc === 'cv') { window.dispatchEvent(new Event('print-cv')); line('Opening the print dialog. Choose Save as PDF.'); return; }
     if (lc === 'ls') { line(ORDER.join('  ')); return; }
     if (DATA[lc]) { line(DATA[lc]); return; }
     line('command not found: ' + c + '. Type help.', 'e');

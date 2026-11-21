@@ -91,3 +91,26 @@ btn.addEventListener('click',function(e){e.stopPropagation();open(!pop.classList
 grid.addEventListener('click',function(e){var b=e.target.closest('.acc-sw');if(b)apply(b.dataset.k)});
 document.addEventListener('click',function(e){if(!pop.contains(e.target))open(false)});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&pop.classList.contains('on')){open(false);btn.focus()}});})();
+
+/* CV print, contact form, live GitHub strip */
+(function(){
+function mailOf(){var c=document.querySelector('.cc[data-kind="mail"]');return c?c.dataset.r.split('').reverse().join(''):''}
+function printCV(){var m=document.getElementById('cvmail');if(m)m.textContent=mailOf();var ul=document.getElementById('cvaw');
+ if(ul&&!ul.children.length){var t=['Galactic Problem Solver, NASA Space Apps Challenge 2026 (team entry: Clearway)'];[].forEach.call(document.querySelectorAll('#awgrid .award.prime h3'),function(h){t.push(h.textContent.trim())});t.forEach(function(x){var li=document.createElement('li');li.textContent=x;ul.appendChild(li)})}
+ document.body.classList.add('cvp');setTimeout(function(){window.print()},50)}
+addEventListener('afterprint',function(){document.body.classList.remove('cvp')});
+addEventListener('print-cv',printCV);
+var b=document.getElementById('cvBtn');if(b)b.addEventListener('click',printCV);
+var KEY='';/* optional: paste a free Web3Forms access key here to send without opening a mail app */
+var f=document.getElementById('cform');
+if(f)f.addEventListener('submit',function(e){e.preventDefault();var m=document.getElementById('fmsg'),d=new FormData(f);m.className='fmsg';
+ if(d.get('botcheck'))return;var n=(d.get('name')||'').trim(),em=(d.get('email')||'').trim(),msg=(d.get('message')||'').trim();
+ if(!n||!/^\S+@\S+\.\S+$/.test(em)||msg.length<5){m.className='fmsg err';m.textContent='Please add your name, a valid email and a short message.';return}
+ if(KEY){m.textContent='Sending...';fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({access_key:KEY,name:n,email:em,message:msg,subject:'Portfolio message from '+n})}).then(function(r){return r.json()}).then(function(j){if(j.success){m.className='fmsg ok';m.textContent='Thank you, your message was sent.';f.reset()}else throw 0}).catch(function(){m.className='fmsg err';m.textContent='Could not send. Please use the email above.'});return}
+ var to=mailOf();location.href='mailto:'+to+'?subject='+encodeURIComponent('Portfolio message from '+n)+'&body='+encodeURIComponent(msg+'\n\nFrom: '+n+' ('+em+')');
+ m.className='fmsg ok';m.textContent='Your email app should open with the message ready to send.'});
+var L=document.getElementById('live'),LT=document.getElementById('livet');
+if(L&&LT){var C=null;try{C=JSON.parse(sessionStorage.getItem('gh')||'null')}catch(e){}
+ function show(o){var d=Math.max(0,Math.round((Date.now()-new Date(o.t))/864e5));LT.textContent='Live from GitHub: last push to '+o.r+' '+(d<1?'today':d===1?'yesterday':d+' days ago')+'.';L.hidden=false}
+ if(C)show(C);else fetch('https://api.github.com/users/devadd2105-max/repos?sort=pushed&per_page=5').then(function(r){return r.ok?r.json():Promise.reject()}).then(function(a){a=a.filter(function(x){return !x.private});if(!a.length)return;var o={r:a[0].name,t:a[0].pushed_at};try{sessionStorage.setItem('gh',JSON.stringify(o))}catch(e){}show(o)}).catch(function(){})}
+})();
