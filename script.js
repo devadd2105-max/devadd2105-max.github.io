@@ -116,7 +116,7 @@
     var cv = $('#net'), ctx = cv.getContext('2d'), W, H, pts = [], mx = -999, my = -999, raf = 0, on = false;
     var cs = getComputedStyle(cv), dotC = cs.color, lineC = cs.getPropertyValue('--net-b').trim() || 'rgba(120,170,235,.5)';
     var root = document.documentElement, frames = 0, slow = 0, last = 0;
-    if (RM || (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) || (navigator.deviceMemory && navigator.deviceMemory < 4)) { root.classList.add('lite'); return; }
+    if (true || RM || (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) || (navigator.deviceMemory && navigator.deviceMemory < 4)) { root.classList.add('lite'); return; }
     function size() {
       W = cv.width = innerWidth; H = cv.height = innerHeight;
       var n = Math.min(55, Math.round(innerWidth * innerHeight / 26000));
@@ -171,8 +171,6 @@
       pend = e; if (pend._q) return; pend._q = true;
       requestAnimationFrame(function () {
         var ev = pend; if (!ev) return;
-        var c = ev.target.closest && ev.target.closest('.card');
-        if (c) { var r = c.getBoundingClientRect(); c.style.setProperty('--mx', (ev.clientX - r.left) + 'px'); c.style.setProperty('--my', (ev.clientY - r.top) + 'px'); }
         if (!TOUCH && !RM) {
           var t = ev.target.closest && ev.target.closest('.vf-frame');
           if (t) { var b = t.getBoundingClientRect(), px = (ev.clientX - b.left) / b.width - .5, py = (ev.clientY - b.top) / b.height - .5; t.style.setProperty('--ry', (px * 8).toFixed(2) + 'deg'); t.style.setProperty('--rx', (-py * 8).toFixed(2) + 'deg'); }

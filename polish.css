@@ -232,3 +232,34 @@ html.px .rcard[data-role="0"] .mono::before,html.px .rcard[data-role="3"] .mono:
 html.px .rcard[data-role="0"] .mono{color:var(--stc-j)}
 html.px .rcard[data-role="3"] .mono{color:var(--stc-s)}
 html.px .rcard[data-role="8"] .mono{color:var(--stc-p)}
+
+/* ---------- 10. speed pass: nothing blurs, blends or follows the pointer ---------- */
+html.px body::after{display:none!important}
+html.px body::before{animation:none!important;will-change:auto!important}
+html.px .card,html.px .btn.ghost,html.px .ibtn,html.px .px-top,html.px .modal,html.px .modal .sheet,html.px .dock,html.px .topbar,html.px .topbar.scrolled,html.px .vf-top{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html.px .topbar.scrolled{background:var(--bg)}
+html.px .dock{background:rgba(8,18,52,.97)}
+html.px[data-theme="light"] .dock{background:rgba(255,255,255,.97)}
+html.px .card::before{display:none!important}
+html.px .px-halo,html.px .px-splash{display:none!important}
+html.px .brand .logo::after{animation:none}
+html.px img{transition:none}
+html.px .mfig img,html.px .pf img,html.px .cph img,html.px .masonry img,html.px .shot img{transition:transform .25s ease-out}
+html.px .view{transition:opacity .16s ease-out,visibility 0s linear .16s;transform:none!important}
+html.px .view.active{transition:opacity .16s ease-out,visibility 0s}
+@keyframes pxIn{from{opacity:0}to{opacity:1}}
+html.px .view.active:not(#home) .wrap>*{animation:pxIn .18s ease-out backwards;animation-delay:0s!important}
+html.px .panel,html.px .tpanel{animation:pxIn .15s ease-out}
+html.px .card,html.px .tile,html.px .rcard,html.px .award,html.px .btn{transition:transform .12s ease-out,border-color .15s,background-color .15s,box-shadow .15s}
+/* tactile: instant press feedback, no 300ms tap delay, no grey tap flash */
+html.px a,html.px button,html.px [role="tab"],html.px .tile,html.px .rcard,html.px .card{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+html.px .tile:active,html.px .rcard:active,html.px .btn:active,html.px .chips button:active,html.px [role="tab"]:active,html.px .dock button:active,html.px .fchips button:active,html.px .ibtn:active{transform:scale(.96);transition-duration:.06s}
+/* long pages: skip painting cards that are far off screen */
+html.px .awgrid>li,html.px .masonry>*,html.px .pf{content-visibility:auto;contain-intrinsic-size:auto 120px}
+
+/* ---------- 11. about: small portrait beside its caption, so both columns end together ---------- */
+html.px .about .portrait{grid-template-columns:112px 1fr;align-items:center;max-width:100%}
+html.px .about .portrait img{width:112px;height:112px;aspect-ratio:1/1;object-fit:cover;object-position:50% 20%;border-radius:calc(var(--rad-l) - 1px) 0 0 calc(var(--rad-l) - 1px)}
+html.px .about .portrait figcaption{padding:12px 18px}
+html.px .about .portrait::after{display:none}
+@media (max-width:560px){html.px .about .portrait{grid-template-columns:88px 1fr}html.px .about .portrait img{width:88px;height:88px}}

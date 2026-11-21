@@ -51,20 +51,6 @@
     bar.style.setProperty('--sp', 0); bar.style.setProperty('--spo', 0); top.classList.remove('on'); if (topbar) topbar.classList.remove('scrolled');
   }).observe(app, { subtree: true, attributes: true, attributeFilter: ['aria-hidden'] });
 
-  /* ---- cursor halo (desktop only) ---- */
-  if (FINE && !RM) {
-    var halo = document.createElement('div'); halo.className = 'px-halo'; halo.setAttribute('aria-hidden', 'true'); document.body.appendChild(halo);
-    var hx = 0, hy = 0, tx = 0, ty = 0, run = false;
-    function loop() { hx += (tx - hx) * .22; hy += (ty - hy) * .22; halo.style.transform = 'translate3d(' + hx.toFixed(1) + 'px,' + hy.toFixed(1) + 'px,0)'; if (Math.abs(tx - hx) + Math.abs(ty - hy) > .3) requestAnimationFrame(loop); else run = false; }
-    addEventListener('pointermove', function (e) {
-      if (e.pointerType !== 'mouse') return;
-      tx = e.clientX; ty = e.clientY; halo.classList.add('on');
-      halo.classList.toggle('hot', !!(e.target.closest && e.target.closest('a,button,[role="tab"],.card,.tile,input,select')));
-      if (!run) { run = true; requestAnimationFrame(loop); }
-    }, { passive: true });
-    document.addEventListener('pointerleave', function () { halo.classList.remove('on'); });
-  }
-
   /* ---- footer on the Contact view ---- */
   var wrap = $('#contact .wrap');
   if (wrap && !$('.px-foot', wrap)) {
@@ -79,16 +65,4 @@
     $('.px-lookbtn', f).textContent = look() === 'classic' ? 'Switch to the new look' : 'Switch to the classic look';
   }
 
-  /* ---- a short splash, once per visit ---- */
-  var seen = false; try { seen = sessionStorage.getItem('px-splash') === '1'; } catch (e) {}
-  if (!seen && !RM && root.classList.contains('px')) {
-    var sp = document.createElement('div'); sp.className = 'px-splash'; sp.setAttribute('aria-hidden', 'true');
-    sp.innerHTML = '<div class="mark"><div class="bd">BD</div><div class="nm">Devadarshan</div><div class="bar"><i></i></div></div>';
-    document.body.appendChild(sp);
-    var t0 = performance.now(), done = false;
-    function hide() { if (done) return; done = true; sp.classList.add('gone'); setTimeout(function () { sp.remove(); }, 800); try { sessionStorage.setItem('px-splash', '1'); } catch (e) {} }
-    var ready = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
-    ready.then(function () { setTimeout(hide, Math.max(0, 850 - (performance.now() - t0))); });
-    setTimeout(hide, 1800);
-  }
 })();
