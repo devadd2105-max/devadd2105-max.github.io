@@ -353,3 +353,8 @@ html[data-theme="dark"] .acc-pop{background:#0b1334;color:#fff;border-color:rgba
 @media print{html,html[data-theme]{color-scheme:light!important}}
 .cg .cform{margin:0;max-width:none}
 @media(min-width:981px){.cg .cform{grid-column:2;grid-row:2/span 3;align-self:stretch;display:flex;flex-direction:column}.cg .cform form{flex:1;align-content:start}.cg .cform textarea{min-height:150px}}
+.est{display:inline-flex;align-items:center;gap:8px;margin-left:14px;padding:6px 12px;border-radius:999px;font-size:.74rem;letter-spacing:.02em;border:1px solid var(--line);white-space:nowrap}
+.est[hidden]{display:none}
+@media(max-width:860px){.est{display:none}}
+.est .vdot{width:7px;height:7px;border-radius:50%;background:var(--pop,#fdc500);flex:none}
+@media(max-width:1060px){.est{display:none}}

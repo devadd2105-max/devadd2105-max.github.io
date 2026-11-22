@@ -114,3 +114,8 @@ if(L&&LT){var C=null;try{C=JSON.parse(sessionStorage.getItem('gh')||'null')}catc
  function show(o){var d=Math.max(0,Math.round((Date.now()-new Date(o.t))/864e5));LT.textContent='Live from GitHub: last push to '+o.r+' '+(d<1?'today':d===1?'yesterday':d+' days ago')+'.';L.hidden=false}
  if(C)show(C);else fetch('https://api.github.com/users/devadd2105-max/repos?sort=pushed&per_page=5').then(function(r){return r.ok?r.json():Promise.reject()}).then(function(a){a=a.filter(function(x){return !x.private});if(!a.length)return;var o={r:a[0].name,t:a[0].pushed_at};try{sessionStorage.setItem('gh',JSON.stringify(o))}catch(e){}show(o)}).catch(function(){})}
 })();
+
+/* Estd. counter: whole days since 21 May 2009, Singapore time */
+(function(){var e=document.getElementById('est'),t=document.getElementById('estt');if(!e||!t)return;
+function n(){var s=new Date(Date.now()+8*36e5),d=Math.floor((Date.UTC(s.getUTCFullYear(),s.getUTCMonth(),s.getUTCDate())-Date.UTC(2009,4,21))/864e5);t.textContent='Estd. '+d.toLocaleString('en-US')+' days';e.hidden=false}
+n();setInterval(n,6e4)})();
