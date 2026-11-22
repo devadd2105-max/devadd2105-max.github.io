@@ -351,3 +351,5 @@ html[data-theme="dark"] .acc-pop{background:#0b1334;color:#fff;border-color:rgba
 }
 @media print{html,html.px,html[data-theme],html.px[data-theme]{background:#fff!important}}
 @media print{html,html[data-theme]{color-scheme:light!important}}
+.cg .cform{margin:0;max-width:none}
+@media(min-width:981px){.cg .cform{grid-column:2;grid-row:2/span 3;align-self:stretch;display:flex;flex-direction:column}.cg .cform form{flex:1;align-content:start}.cg .cform textarea{min-height:150px}}
