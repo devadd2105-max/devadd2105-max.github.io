@@ -366,3 +366,13 @@ html.px .cpanels{min-width:0;max-width:100%}
   html.px .cfiles{flex-direction:row;overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch;scrollbar-width:thin;padding-bottom:4px}
   html.px .cfiles button{flex:0 0 auto;white-space:nowrap}
 }
+
+/* §21 live demo launcher */
+html.px .demos-h{margin:28px 0 4px}
+html.px .demos{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:12px}
+html.px .demo{display:flex;flex-direction:column;gap:6px;padding:16px;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s}
+html.px .demo b{font-size:1rem}
+html.px .demo span{font-size:.85rem;opacity:.8}
+html.px .demo em{font-style:normal;font-size:.78rem;color:var(--pop,#fdc500);margin-top:auto}
+html.px .demo:hover,html.px .demo:focus-visible{border-color:var(--pop,#fdc500);transform:translateY(-2px)}
+@media (prefers-reduced-motion:reduce){html.px .demo{transition:none}html.px .demo:hover{transform:none}}

@@ -221,7 +221,7 @@
     var pt = document.getElementById('pt1'), done = false;
     function load() {
       if (done) return; done = true;
-      fetch('code-more.json?v=fast18').then(function (r) { return r.ok ? r.json() : Promise.reject(); }).then(function (d) {
+      fetch('code-more.json?v=fast19').then(function (r) { return r.ok ? r.json() : Promise.reject(); }).then(function (d) {
         var tl = document.getElementById('cft'), pl = tl && tl.parentNode.querySelector('.cpanels');
         if (!tl || !pl) return;
         tl.insertAdjacentHTML('beforeend', d.tabs); pl.insertAdjacentHTML('beforeend', d.panels);

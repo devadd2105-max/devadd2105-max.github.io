@@ -41,8 +41,8 @@
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="style.css?v=fast18">
-<link rel="stylesheet" href="polish.css?v=fast18">
+<link rel="stylesheet" href="style.css?v=fast19">
+<link rel="stylesheet" href="polish.css?v=fast19">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -275,7 +275,7 @@
     <div class="tpanel" role="tabpanel" id="pp1" aria-labelledby="pt1" hidden>
       <ul class="cstats" aria-label="Code at a glance"><li><b>25k+</b><span>lines of code across seven public repos</span></li><li><b>0</b><span>runtime dependencies</span></li><li><b>19</b><span>unit tests in SG Wayfinder</span></li><li><b>3</b><span>languages: JavaScript, Python and Java</span></li></ul>
       <div class="codelab">
-        <div class="cfiles" role="tablist" aria-label="Code excerpts" aria-orientation="vertical" id="cft"><button type="button" role="tab" id="cf0" aria-controls="cc0" aria-selected="true" tabindex="0" class="mono"><b>scoring.js</b><small>SG Wayfinder</small></button><button type="button" role="tab" id="cf1" aria-controls="cc1" aria-selected="false" tabindex="-1" class="mono"><b>rng.js</b><small>SG Wayfinder</small></button><button type="button" role="tab" id="cf2" aria-controls="cc2" aria-selected="false" tabindex="-1" class="mono"><b>geo.js</b><small>SG Wayfinder</small></button><button type="button" role="tab" id="cf3" aria-controls="cc3" aria-selected="false" tabindex="-1" class="mono"><b>pgda.py</b><small>Clearway</small></button><button type="button" role="tab" id="cf4" aria-controls="cc4" aria-selected="false" tabindex="-1" class="mono"><b>ephem.js</b><small>Clearway</small></button></div>
+        <div class="cfiles" role="tablist" aria-label="Code excerpts" aria-orientation="vertical" id="cft"><button type="button" role="tab" id="cf0" aria-controls="cc0" aria-selected="true" tabindex="0" class="mono"><b>scoring.js</b><small>SG Wayfinder</small></button><button type="button" role="tab" id="cf3" aria-controls="cc3" aria-selected="false" tabindex="-1" class="mono"><b>pgda.py</b><small>Clearway</small></button></div>
         <div class="cpanels"><div class="card code" role="tabpanel" id="cc0" aria-labelledby="cf0" ><div class="hud-bar"><i></i><i></i><i></i><span>SG Wayfinder / scoring.js</span><a href="https://github.com/devadd2105-max/sg-WayFinder/blob/HEAD/js/scoring.js" target="_blank" rel="noopener">View on GitHub &rarr;</a></div><p class="cdesc">How a guess is scored from its distance to the target. Excerpt of the real file.</p><pre><code><span class="c">// Scoring. Three parts per round, 1,000 points each.</span>
 
 <span class="kw">export</span> <span class="kw">const</span> MAX_PER_PART = <span class="n">1000</span>;
@@ -299,59 +299,6 @@
   <span class="kw">if</span> (!(actualValue &gt; <span class="n">0</span>)) <span class="kw">return</span> <span class="n">0</span>;
   <span class="kw">const</span> ratio = Math.<span class="fn">min</span>(<span class="n">1</span>, referenceValue / actualValue);
   <span class="kw">return</span> Math.<span class="fn">round</span>(MAX_PER_PART * ratio ** <span class="n">2</span>);
-}</code></pre></div><div class="card code" role="tabpanel" id="cc1" aria-labelledby="cf1" hidden><div class="hud-bar"><i></i><i></i><i></i><span>SG Wayfinder / rng.js</span><a href="https://github.com/devadd2105-max/sg-WayFinder/blob/HEAD/js/rng.js" target="_blank" rel="noopener">View on GitHub &rarr;</a></div><p class="cdesc">A seeded random number generator, so every round is reproducible. Excerpt of the real file.</p><pre><code><span class="kw">function</span> <span class="fn">xmur3</span>(str) {
-  <span class="kw">let</span> h = <span class="n">1779033703</span> ^ str.length;
-  <span class="kw">for</span> (<span class="kw">let</span> i = <span class="n">0</span>; i &lt; str.length; i++) {
-    h = Math.<span class="fn">imul</span>(h ^ str.<span class="fn">charCodeAt</span>(i), <span class="n">3432918353</span>);
-    h = (h &lt;&lt; <span class="n">13</span>) | (h &gt;&gt;&gt; <span class="n">19</span>);
-  }
-  <span class="kw">return</span> () =&gt; {
-    h = Math.<span class="fn">imul</span>(h ^ (h &gt;&gt;&gt; <span class="n">16</span>), <span class="n">2246822507</span>);
-    h = Math.<span class="fn">imul</span>(h ^ (h &gt;&gt;&gt; <span class="n">13</span>), <span class="n">3266489909</span>);
-    <span class="kw">return</span> (h ^= h &gt;&gt;&gt; <span class="n">16</span>) &gt;&gt;&gt; <span class="n">0</span>;
-  };
-}
-
-<span class="kw">function</span> <span class="fn">mulberry32</span>(a) {
-  <span class="kw">return</span> () =&gt; {
-    a |= <span class="n">0</span>;
-    a = (a + 0x6d2b79f5) | <span class="n">0</span>;
-    <span class="kw">let</span> t = Math.<span class="fn">imul</span>(a ^ (a &gt;&gt;&gt; <span class="n">15</span>), <span class="n">1</span> | a);
-    t = (t + Math.<span class="fn">imul</span>(t ^ (t &gt;&gt;&gt; <span class="n">7</span>), <span class="n">61</span> | t)) ^ t;
-    <span class="kw">return</span> ((t ^ (t &gt;&gt;&gt; <span class="n">14</span>)) &gt;&gt;&gt; <span class="n">0</span>) / <span class="n">4294967296</span>;
-  };
-}
-
-<span class="kw">export</span> <span class="kw">function</span> <span class="fn">createRng</span>(seed) {
-  <span class="kw">const</span> next = <span class="fn">mulberry32</span>(<span class="fn">xmur3</span>(<span class="fn">String</span>(seed))());
-  <span class="kw">return</span> {
-    next,
-    float: (min, max) =&gt; min + <span class="fn">next</span>() * (max - min),
-    <span class="c">/** Integer in [min, max] inclusive. */</span>
-    int: (min, max) =&gt; min + Math.<span class="fn">floor</span>(<span class="fn">next</span>() * (max - min + <span class="n">1</span>)),
-    <span class="c">// pick() and shuffle() omitted here</span>
-  };
-}</code></pre></div><div class="card code" role="tabpanel" id="cc2" aria-labelledby="cf2" hidden><div class="hud-bar"><i></i><i></i><i></i><span>SG Wayfinder / geo.js</span><a href="https://github.com/devadd2105-max/sg-WayFinder/blob/HEAD/js/geo.js" target="_blank" rel="noopener">View on GitHub &rarr;</a></div><p class="cdesc">Great-circle distance between two points on the Earth. Excerpt of the real file.</p><pre><code><span class="kw">const</span> EARTH_R = <span class="n">6371008.8</span>; <span class="c">// metres</span>
-<span class="kw">const</span> rad = (d) =&gt; (d * Math.PI) / <span class="n">180</span>;
-<span class="kw">const</span> deg = (r) =&gt; (r * <span class="n">180</span>) / Math.PI;
-
-<span class="c">/** Great-circle distance in metres. */</span>
-<span class="kw">export</span> <span class="kw">function</span> <span class="fn">haversine</span>(a, b) {
-  <span class="kw">const</span> dLat = <span class="fn">rad</span>(b.lat - a.lat);
-  <span class="kw">const</span> dLng = <span class="fn">rad</span>(b.lng - a.lng);
-  <span class="kw">const</span> s =
-    Math.<span class="fn">sin</span>(dLat / <span class="n">2</span>) ** <span class="n">2</span> +
-    Math.<span class="fn">cos</span>(<span class="fn">rad</span>(a.lat)) * Math.<span class="fn">cos</span>(<span class="fn">rad</span>(b.lat)) * Math.<span class="fn">sin</span>(dLng / <span class="n">2</span>) ** <span class="n">2</span>;
-  <span class="kw">return</span> <span class="n">2</span> * EARTH_R * Math.<span class="fn">asin</span>(Math.<span class="fn">min</span>(<span class="n">1</span>, Math.<span class="fn">sqrt</span>(s)));
-}
-
-<span class="c">/** Initial bearing from a to b in degrees, 0-360. */</span>
-<span class="kw">export</span> <span class="kw">function</span> <span class="fn">bearing</span>(a, b) {
-  <span class="kw">const</span> y = Math.<span class="fn">sin</span>(<span class="fn">rad</span>(b.lng - a.lng)) * Math.<span class="fn">cos</span>(<span class="fn">rad</span>(b.lat));
-  <span class="kw">const</span> x =
-    Math.<span class="fn">cos</span>(<span class="fn">rad</span>(a.lat)) * Math.<span class="fn">sin</span>(<span class="fn">rad</span>(b.lat)) -
-    Math.<span class="fn">sin</span>(<span class="fn">rad</span>(a.lat)) * Math.<span class="fn">cos</span>(<span class="fn">rad</span>(b.lat)) * Math.<span class="fn">cos</span>(<span class="fn">rad</span>(b.lng - a.lng));
-  <span class="kw">return</span> (<span class="fn">deg</span>(Math.<span class="fn">atan2</span>(y, x)) + <span class="n">360</span>) % <span class="n">360</span>;
 }</code></pre></div><div class="card code" role="tabpanel" id="cc3" aria-labelledby="cf3" hidden><div class="hud-bar"><i></i><i></i><i></i><span>Clearway / pgda.py</span><a href="https://github.com/devadd2105-max/Clearway/blob/HEAD/tools/pgda.py" target="_blank" rel="noopener">View on GitHub &rarr;</a></div><p class="cdesc">Reads one file out of a remote zip using HTTP range requests, with the standard library only. Excerpt of the real file.</p><pre><code><span class="kw">class</span> RemoteZip:
     <span class="s">""</span><span class="s">"Read the directory of a zip on a web server and extract single members with byte-range requests
     (zip and zip64; stored or deflated members)."</span><span class="s">""</span>
@@ -371,29 +318,7 @@
             z64, _ = <span class="fn">fetch_range</span>(url, z64_off, z64_off + <span class="n">55</span>)
             (_, _, _, _, _, _, _, n_total, cd_size, cd_off) = struct.<span class="fn">unpack</span>(<span class="s">"&lt;4sQHHIIQQQQ"</span>, z64[:<span class="n">56</span>])
         cd, _ = <span class="fn">fetch_range</span>(url, cd_off, cd_off + cd_size - <span class="n">1</span>)
-        <span class="c"># ... central-directory entries are then parsed into self.members</span></code></pre></div><div class="card code" role="tabpanel" id="cc4" aria-labelledby="cf4" hidden><div class="hud-bar"><i></i><i></i><i></i><span>Clearway / ephem.js</span><a href="https://github.com/devadd2105-max/Clearway/blob/HEAD/web/js/lunar/ephem.js" target="_blank" rel="noopener">View on GitHub &rarr;</a></div><p class="cdesc">Ephemeris maths for the lunar mission browser. Excerpt of the real file.</p><pre><code><span class="c">// Clearway Lunar — analytic ephemeris and lunar orientation.</span>
-<span class="c">//</span>
-<span class="c">// Sun:  Meeus, Astronomical Algorithms ch. 25 (≈0.01°), with annual aberration.</span>
-<span class="c">// Moon: Meeus ch. 47, the truncated ELP-2000/82 lunar theory (≈10" in longitude).</span>
-<span class="c">// Moon orientation: IAU WGCCRE 2009 model (Archinal et al. 2011), which approximates the</span>
-<span class="c">//       Mean Earth / polar axis frame used by LOLA maps and JPL Horizons lunar sites.</span>
-<span class="c">// Positions are geometric, in km, in the J2000 equatorial frame unless noted.</span>
-<span class="c">// Validated against JPL Horizons (DE441) in tests/lunar.test.mjs.</span>
-
-<span class="kw">export</span> <span class="kw">const</span> DEG = Math.PI / <span class="n">180</span>;
-<span class="kw">export</span> <span class="kw">const</span> R_MOON = <span class="n">1737.4</span>;          <span class="c">// km, IAU mean radius (also LOLA reference sphere)</span>
-<span class="kw">const</span> TT_MINUS_UTC = <span class="n">37</span> + <span class="n">32.184</span>;      <span class="c">// s (leap seconds since 2017-01-01 + 32.184 s)</span>
-
-<span class="c">/** Julian centuries (TT ≈ TDB) since J2000.0 for a UTC timestamp in ms. */</span>
-<span class="kw">export</span> <span class="kw">function</span> <span class="fn">centuriesTT</span>(tMs) {
-  <span class="kw">const</span> jdTT = (tMs + TT_MINUS_UTC * <span class="n">1000</span>) / <span class="n">86400000</span> + <span class="n">2440587.5</span>;
-  <span class="kw">return</span> (jdTT - <span class="n">2451545.0</span>) / <span class="n">36525</span>;
-}
-
-<span class="c">/** Mean obliquity of the ecliptic of date (rad). */</span>
-<span class="kw">export</span> <span class="kw">function</span> <span class="fn">obliquity</span>(T) {
-  <span class="kw">return</span> (<span class="n">23.439291111</span> - (<span class="n">46.815</span> * T + <span class="n">0.00059</span> * T * T - <span class="n">0.001813</span> * T * T * T) / <span class="n">3600</span>) * DEG;
-}</code></pre></div></div>
+        <span class="c"># ... central-directory entries are then parsed into self.members</span></code></pre></div></div>
       </div>
     </div>
 
@@ -431,6 +356,15 @@
   }
   </code></pre>
         </div>
+      </div>
+      <h3 class="vh3 demos-h">More live demos</h3>
+      <p class="sub">Each opens in a new tab and runs in your browser. Nothing loads until you tap it.</p>
+      <div class="demos">
+        <a class="card demo" href="https://devadd2105-max.github.io/sg-WayFinder/" target="_blank" rel="noopener"><b>SG Wayfinder</b><span>Find yourself in Street View, plan a route, guess the time.</span><em class="mono">Open &#8599;</em></a>
+        <a class="card demo" href="https://devadd2105-max.github.io/221b-casebook/" target="_blank" rel="noopener"><b>Casebook 221B</b><span>Solve a Sherlock Holmes case in the sitting room.</span><em class="mono">Open &#8599;</em></a>
+        <a class="card demo" href="https://devadd2105-max.github.io/crack-the-password/" target="_blank" rel="noopener"><b>Crack the Password</b><span>See how fast a stranger could guess a password.</span><em class="mono">Open &#8599;</em></a>
+        <a class="card demo" href="https://devadd2105-max.github.io/Flag-Lab/" target="_blank" rel="noopener"><b>Flag Lab</b><span>Capture-the-flag style cipher puzzles.</span><em class="mono">Open &#8599;</em></a>
+        <a class="card demo" href="https://devadd2105-max.github.io/Focal/" target="_blank" rel="noopener"><b>Focal</b><span>Photography geometry tool, in your browser.</span><em class="mono">Open &#8599;</em></a>
       </div>
     </div>
 
@@ -966,8 +900,8 @@
 <div id="rain" aria-hidden="true"><canvas id="rainc"></canvas><p>MATRIX MODE · press Esc to exit</p></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="script.js?v=fast18" defer></script>
-<script src="polish.js?v=fast18" defer></script>
+<script src="script.js?v=fast19" defer></script>
+<script src="polish.js?v=fast19" defer></script>
 <script data-goatcounter="https://devadarshan95.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
