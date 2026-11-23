@@ -188,25 +188,25 @@
 
   /* ---------- tablist helper ---------- */
   function tablist(list, cb) {
-    var tabs = $$('[role="tab"]', list);
+    if (!list) return;
+    function tabs() { return $$('[role="tab"]', list); }
     function sel(t, focus) {
-      tabs.forEach(function (x) {
+      tabs().forEach(function (x) {
         var on = x === t; x.setAttribute('aria-selected', on ? 'true' : 'false'); x.tabIndex = on ? 0 : -1;
         var pid = x.getAttribute('aria-controls'); if (pid) { var p = document.getElementById(pid); if (p) p.hidden = !on; }
       });
       if (focus) t.focus();
       if (cb) cb(t);
     }
-    tabs.forEach(function (t, i) {
-      t.tabIndex = t.getAttribute('aria-selected') === 'true' ? 0 : -1;
-      t.addEventListener('click', function () { sel(t); });
-      t.addEventListener('keydown', function (e) {
-        var n = null, k = e.key, L = tabs.length;
-        if (k === 'ArrowDown' || k === 'ArrowRight') n = tabs[(i + 1) % L];
-        else if (k === 'ArrowUp' || k === 'ArrowLeft') n = tabs[(i - 1 + L) % L];
-        else if (k === 'Home') n = tabs[0]; else if (k === 'End') n = tabs[L - 1];
-        if (n) { e.preventDefault(); e.stopPropagation(); sel(n, true); }
-      });
+    tabs().forEach(function (t) { t.tabIndex = t.getAttribute('aria-selected') === 'true' ? 0 : -1; });
+    list.addEventListener('click', function (e) { var t = e.target.closest && e.target.closest('[role="tab"]'); if (t && list.contains(t)) sel(t); });
+    list.addEventListener('keydown', function (e) {
+      var t = e.target.closest && e.target.closest('[role="tab"]'); if (!t) return;
+      var all = tabs(), i = all.indexOf(t), n = null, k = e.key, L = all.length;
+      if (k === 'ArrowDown' || k === 'ArrowRight') n = all[(i + 1) % L];
+      else if (k === 'ArrowUp' || k === 'ArrowLeft') n = all[(i - 1 + L) % L];
+      else if (k === 'Home') n = all[0]; else if (k === 'End') n = all[L - 1];
+      if (n) { e.preventDefault(); e.stopPropagation(); sel(n, true); }
     });
   }
   tablist($('#rl'), function (t) {
@@ -216,6 +216,20 @@
   tablist($('#mmt'));
   tablist($('#prt'));
   tablist($('#cft'));
+  /* more code excerpts: fetched the first time the Code tab is opened, so the page itself stays light */
+  (function () {
+    var pt = document.getElementById('pt1'), done = false;
+    function load() {
+      if (done) return; done = true;
+      fetch('code-more.json?v=fast18').then(function (r) { return r.ok ? r.json() : Promise.reject(); }).then(function (d) {
+        var tl = document.getElementById('cft'), pl = tl && tl.parentNode.querySelector('.cpanels');
+        if (!tl || !pl) return;
+        tl.insertAdjacentHTML('beforeend', d.tabs); pl.insertAdjacentHTML('beforeend', d.panels);
+      }).catch(function () { done = false; });
+    }
+    if (pt) { pt.addEventListener('click', load); pt.addEventListener('focus', load, { once: true }); }
+    if (location.hash === '#projects' && pt && pt.getAttribute('aria-selected') === 'true') load();
+  })();
   tablist($('#awf'), function (t) {
     var f = t.dataset.f, n = 0;
     $$('#awgrid .award').forEach(function (a) {

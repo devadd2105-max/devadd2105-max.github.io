@@ -358,3 +358,11 @@ html[data-theme="dark"] .acc-pop{background:#0b1334;color:#fff;border-color:rgba
 @media(max-width:860px){.est{display:none}}
 .est .vdot{width:7px;height:7px;border-radius:50%;background:var(--pop,#fdc500);flex:none}
 @media(max-width:1060px){.est{display:none}}
+
+/* §20 code tabs: never push the page sideways */
+html.px .codelab>*{min-width:0}
+html.px .cpanels{min-width:0;max-width:100%}
+@media (max-width:980px){
+  html.px .cfiles{flex-direction:row;overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch;scrollbar-width:thin;padding-bottom:4px}
+  html.px .cfiles button{flex:0 0 auto;white-space:nowrap}
+}
