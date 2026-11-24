@@ -1236,3 +1236,4 @@ html .medal.e.x{background:radial-gradient(circle at 30% 25%,#fff1a8,var(--pop,#
 .vf-top{display:inline-flex;align-items:center;gap:8px;width:max-content;padding:5px 12px;border-radius:999px;background:rgba(0,12,40,.62);color:#fff;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);text-shadow:none}
 .vf-top b{color:var(--pop,#fdc500)}
 .vf-top em{font-style:normal;color:#fff}
+.more h4{font-family:var(--mono);font-size:.74rem;color:var(--y);text-transform:uppercase;letter-spacing:.1em;margin:18px 0 6px}
