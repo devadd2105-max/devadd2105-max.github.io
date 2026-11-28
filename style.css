@@ -1310,3 +1310,13 @@ html .medal.e.x{background:radial-gradient(circle at 30% 25%,#fff1a8,var(--pop,#
 @media (prefers-reduced-motion:reduce){.ghp-dot{animation:none}}
 .ghp-lang[hidden]{display:none}
 .ghp.off .ghp-dot{background:#94a3b8;animation:none}
+/* pulse card fills its column and ends level with the repo box */
+@media (min-width:1000px){
+  #projects .head{grid-template-rows:auto auto auto 1fr}
+  #projects .head .ghp{max-width:none;grid-row:4;align-self:stretch;display:flex;flex-direction:column;justify-content:space-between;gap:12px;margin-top:18px;box-sizing:border-box}
+  #projects .head .ghp .ghp-lang{margin-top:0}
+}
+@media (min-width:1000px){
+  #projects .head .repomini{align-self:stretch;display:flex;flex-direction:column;box-sizing:border-box}
+  #projects .head .repomini>ul{flex:1;grid-auto-rows:1fr;align-content:stretch}
+}
