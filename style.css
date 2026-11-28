@@ -1266,3 +1266,10 @@ html .medal.e.x{background:radial-gradient(circle at 30% 25%,#fff1a8,var(--pop,#
 .repomini a.rrow:hover,.repomini a.rrow:focus-visible{border-color:var(--c,var(--y2));background:color-mix(in srgb,var(--c,#888) 12%,var(--card2))}
 #pp3 .card.demo{border-top:3px solid var(--c,var(--line))}
 #pp3 .card.demo b .ri{display:inline-grid;place-items:center;width:26px;height:26px;margin-right:6px;border-radius:8px;font-style:normal;font-size:.95rem;vertical-align:middle;background:color-mix(in srgb,var(--c,#888) 22%,transparent)}
+
+/* colour key inside the repo card */
+.repomini li.legend{grid-column:2 / -1;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:8px 12px;border:1px dashed var(--line);border-radius:10px;background:transparent}
+.repomini .lg-t{font-size:.66rem;font-weight:600;color:var(--dim);letter-spacing:.02em}
+.repomini .legend ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px 10px}
+.repomini .legend li{display:flex;align-items:center;gap:6px;font-size:.66rem;line-height:1.15}
+.repomini .legend i{flex:none;width:10px;height:10px;border-radius:3px;background:var(--c)}
