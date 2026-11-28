@@ -119,3 +119,26 @@ if(L&&LT){var C=null;try{C=JSON.parse(sessionStorage.getItem('gh')||'null')}catc
 (function(){var e=document.getElementById('est'),t=document.getElementById('estt');if(!e||!t)return;
 function n(){var s=new Date(Date.now()+8*36e5),d=Math.floor((Date.UTC(s.getUTCFullYear(),s.getUTCMonth(),s.getUTCDate())-Date.UTC(2009,4,21))/864e5);t.textContent='Estd. '+d.toLocaleString('en-US')+' days';e.hidden=false}
 n();setInterval(n,6e4)})();
+
+/* GitHub pulse: latest push and language share, live from the public API (no key, cached in this tab) */
+(function(){var P=document.getElementById('ghp');if(!P)return;
+var MAIN=document.getElementById('ghp-main'),WHEN=document.getElementById('ghp-when'),LANG=document.getElementById('ghp-lang'),BAR=document.getElementById('ghp-bar'),KEY=document.getElementById('ghp-key');
+var COL={JavaScript:'#eab308',Python:'#3b82f6',Java:'#f97316',HTML:'#ef4444',CSS:'#8b5cf6',TypeScript:'#0ea5e9',Other:'#94a3b8'};
+var data=null,TTL=10*60*1000;
+function esc(x){return String(x).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function ago(t){var s=Math.max(0,Math.round((Date.now()-new Date(t))/1000));if(s<60)return'just now';var m=Math.round(s/60);if(m<60)return m+' min ago';var h=Math.round(m/60);if(h<24)return h+' hour'+(h>1?'s':'')+' ago';var d=Math.round(h/24);return d===1?'yesterday':d+' days ago'}
+function paint(){if(!data)return;var a=data.repos;if(!a.length)return;var top=a[0];
+ MAIN.innerHTML='<a href="https://github.com/devadd2105-max/'+encodeURIComponent(top.name)+'" target="_blank" rel="noopener">'+esc(top.name)+'</a>';WHEN.textContent=ago(top.pushed_at);
+ var c={};a.forEach(function(r){var l=r.language||'Other';c[l]=(c[l]||0)+1});
+ var k=Object.keys(c).sort(function(x,y){return c[y]-c[x]}),n=a.length;
+ BAR.innerHTML=k.map(function(l){return'<i style="width:'+(c[l]/n*100)+'%;background:'+(COL[l]||COL.Other)+'" title="'+esc(l)+': '+c[l]+' of '+n+'"></i>'}).join('');
+ BAR.setAttribute('aria-label','Main language of '+n+' public repositories: '+k.map(function(l){return l+' '+c[l]}).join(', '));
+ KEY.innerHTML=k.map(function(l){return'<li><i style="background:'+(COL[l]||COL.Other)+'"></i>'+esc(l)+' <b>'+c[l]+'</b></li>'}).join('');LANG.hidden=false}
+function fail(){if(data)return;P.classList.add('off');MAIN.innerHTML='<a href="https://github.com/devadd2105-max" target="_blank" rel="noopener">Open my GitHub</a>';WHEN.textContent='live data unavailable'}
+function load(force){var C=null;try{C=JSON.parse(sessionStorage.getItem('ghr')||'null')}catch(e){}
+ if(C&&!force&&Date.now()-C.at<TTL){data=C;paint();return}
+ fetch('https://api.github.com/users/devadd2105-max/repos?sort=pushed&per_page=100').then(function(r){return r.ok?r.json():Promise.reject()}).then(function(a){a=a.filter(function(x){return !x.private&&!x.fork});if(!a.length)throw 0;
+  data={at:Date.now(),repos:a.map(function(x){return{name:x.name,language:x.language,pushed_at:x.pushed_at}})};try{sessionStorage.setItem('ghr',JSON.stringify(data))}catch(e){}paint()}).catch(function(){if(C){data=C;paint()}else fail()})}
+load(false);
+setInterval(function(){if(document.hidden)return;if(data&&data.repos[0])WHEN.textContent=ago(data.repos[0].pushed_at);if(!data||Date.now()-data.at>TTL)load(true)},60000);
+})();
