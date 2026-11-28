@@ -383,7 +383,7 @@
   var proMail = function () { return dec($('.cc[data-r]').dataset.r); };
   var phMail = function () { return dec($$('.cc[data-r]')[1].dataset.r); };
   var DATA = {
-    help: 'Commands:\n  whoami       who I am\n  skills       what I bring\n  reading      books and Holmes\n  leadership   roles, newest first\n  projects     things I have built\n  awards       highlights\n  credentials  earned and planned\n  github       my GitHub account\n  contact      how to reach me\n  goto <page>  home, about, leadership, projects, awards, credentials, photography, contact\n  ask <q>      ask about me (when enabled)\n  ctf          a tiny capture-the-flag puzzle\n  hack         something fun\n  clear        clear the screen',
+    help: 'ABOUT ME\n  whoami  skills  reading  leadership  projects  awards  credentials  contact  cv\n\nGITHUB\n  repos            all 19 repositories (public and private)\n  open <repo>      open a public repo on GitHub, e.g. open focal\n  search <word>    find repos by name or description\n  langs            language share across my public repos\n  latest           my most recent push\n  github           my GitHub account\n\nTOOLS\n  password [n]     make a random password (default 16, runs on your device)\n  hash <text>      SHA-256 of some text\n  b64 <text>       Base64 encode      unb64 <text>   decode\n  caesar <n> <text>  shift letters by n (rot13 = caesar 13)\n  tip              a cybersecurity tip\n\nSITE\n  goto <page>      home, about, leadership, projects, programmes, awards, credentials, photography, contact\n  ls  pwd  cd <page>  random  stats  neofetch  uptime  date\n  theme [dark|light]  history  echo <text>  clear  exit\n\nFUN\n  ctf  hack  ask <q> (when enabled)',
     whoami: 'Balamurugan Devadarshan (goes by Devadarshan)\nStudent, St. Andrew\'s Junior College, Singapore.\nPresident of the Infocomm Club. Python, cybersecurity, public speaking, photography.\nAvid reader and proud Holmesian.\nGoal: cybersecurity and technology, with an open mind about where it leads.',
     skills: 'Technical:   Python, JavaScript/HTML/CSS, networking basics, CTF, data fundamentals\nDomain:      cybersecurity fundamentals, safe online practices\nPeople:      team leadership, public speaking, event hosting, duty rotation planning, teaching, photography\nBeyond:      Tamil speech, Taekwondo (green belt), swimming (silver), guitar (beginner), reading',
     reading: 'Avid reader. Proud Holmesian: a devoted Sherlock Holmes fan.',
@@ -419,6 +419,113 @@
     if (lc === 'sudo' || lc.indexOf('sudo ') === 0) { line('Nice try. This user is not in the sudoers file. This incident will be reported (to nobody).', 'e'); return; }
     if (lc === 'cv') { window.dispatchEvent(new Event('print-cv')); line('Opening the print dialog. Choose Save as PDF.'); return; }
     if (lc === 'ls') { line(ORDER.join('  ')); return; }
+    /* ---- extra terminal commands ---- */
+    var args = c.split(/\s+/).slice(1).join(' ');
+    function repoList() {
+      return $$('.repomini .rrow').map(function (r) {
+        var n = r.querySelector('b').textContent.trim(), p = /private/i.test(r.querySelector('small').textContent);
+        return { name: n, priv: p };
+      });
+    }
+    function ghCache() { try { return JSON.parse(sessionStorage.getItem('ghr') || 'null'); } catch (e) { return null; } }
+    function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }
+    function shift(str, n) {
+      return str.replace(/[a-z]/gi, function (ch) { var b = ch <= 'Z' ? 65 : 97; return String.fromCharCode((ch.charCodeAt(0) - b + n % 26 + 26) % 26 + b); });
+    }
+    var TIPS = [
+      'Use a different password for every account. A password manager makes that realistic.',
+      'Turn on two-step verification, and prefer an authenticator app over SMS codes.',
+      'Length beats cleverness: a long passphrase is harder to guess than a short symbol-heavy word.',
+      'Phishing works by urgency. Pause, then go to the site yourself instead of tapping the link.',
+      'Keep your phone and apps updated. Most attacks use bugs that already have a fix.',
+      'Check the full address before you sign in. paypa1.com is not paypal.com.',
+      'Never share a one-time code with anyone, including someone who says they are from your bank.',
+      'Public Wi-Fi is fine for browsing sites that use HTTPS, but do not log in to sensitive accounts without a VPN or mobile data.',
+      'Back up what matters in two places, and test that you can restore it.',
+      'If a deal or a message sounds too good or too scary to be true, verify it somewhere else first.'
+    ];
+    if (lc === 'repos') {
+      var rl = repoList(); if (!rl.length) { line('Repo list is not on this page yet.', 'e'); return; }
+      line(rl.length + ' repositories (' + rl.filter(function (r) { return !r.priv; }).length + ' public, ' + rl.filter(function (r) { return r.priv; }).length + ' private):\n' + rl.map(function (r, i) { return ('0' + (i + 1)).slice(-2) + '  ' + r.name + (r.priv ? '   [private]' : ''); }).join('\n') + '\nTry: open <repo>');
+      return;
+    }
+    if (parts[0] === 'open') {
+      if (!args) { line('Usage: open <repo>  (try: repos)'); return; }
+      var q1 = args.toLowerCase().replace(/\s+/g, '-'), rl2 = repoList();
+      var hit = rl2.filter(function (r) { return r.name.toLowerCase() === q1; })[0] || rl2.filter(function (r) { return r.name.toLowerCase().indexOf(q1) > -1; })[0];
+      if (!hit) { line('No repo matches "' + args + '". Type repos for the list.', 'e'); return; }
+      if (hit.priv) { line(hit.name + ' is a private repository, so there is nothing public to open.'); return; }
+      line('Opening ' + GH + '/' + hit.name + ' ...'); window.open(GH + '/' + encodeURIComponent(hit.name), '_blank', 'noopener'); return;
+    }
+    if (parts[0] === 'search' || parts[0] === 'grep' || parts[0] === 'find') {
+      if (!args) { line('Usage: search <word>, e.g. search python'); return; }
+      var w = args.toLowerCase(), found = $$('#pp3 .card.demo').filter(function (d) { return d.textContent.toLowerCase().indexOf(w) > -1; }).map(function (d) { return d.querySelector('b').textContent.replace(/^[^A-Za-z0-9]+/, '').trim(); });
+      line(found.length ? found.length + ' match' + (found.length > 1 ? 'es' : '') + ':\n  ' + found.join('\n  ') : 'No repo mentions "' + args + '".'); return;
+    }
+    if (lc === 'langs' || lc === 'languages') {
+      var g = ghCache(); if (!g || !g.repos) { line('Language data has not loaded yet. Open the Projects page, then try again.', 'e'); return; }
+      var cnt = {}; g.repos.forEach(function (r) { var l = r.language || 'Other'; cnt[l] = (cnt[l] || 0) + 1; });
+      var ks = Object.keys(cnt).sort(function (a, b) { return cnt[b] - cnt[a]; }), tot = g.repos.length;
+      line('Main language of my ' + tot + ' public repos (by repo count, not lines of code):\n' + ks.map(function (k) { var p = Math.round(cnt[k] / tot * 100); return ('            ' + k).slice(-12) + '  ' + new Array(Math.max(1, Math.round(p / 5)) + 1).join('#') + '  ' + cnt[k] + ' (' + p + '%)'; }).join('\n')); return;
+    }
+    if (lc === 'latest') {
+      var g2 = ghCache(); if (!g2 || !g2.repos || !g2.repos[0]) { line('Live GitHub data has not loaded yet. Open the Projects page, then try again.', 'e'); return; }
+      var top = g2.repos[0], mins = Math.max(0, Math.round((Date.now() - new Date(top.pushed_at)) / 60000));
+      line('Latest push: ' + top.name + ', ' + (mins < 60 ? mins + ' min ago' : mins < 1440 ? Math.round(mins / 60) + ' h ago' : Math.round(mins / 1440) + ' days ago') + '\n' + GH + '/' + top.name); return;
+    }
+    if (lc === 'date' || lc === 'time') { line(new Date().toLocaleString('en-SG', { timeZone: 'Asia/Singapore', dateStyle: 'full', timeStyle: 'medium' }) + ' (Singapore)'); return; }
+    if (lc === 'uptime') {
+      var sg = new Date(Date.now() + 8 * 36e5), days = Math.floor((Date.UTC(sg.getUTCFullYear(), sg.getUTCMonth(), sg.getUTCDate()) - Date.UTC(2009, 4, 21)) / 864e5);
+      line('Up ' + days.toLocaleString('en-US') + ' days (since 21 May 2009).'); return;
+    }
+    if (lc === 'pwd') { var av = document.querySelector('.view.active'); line('/home/devadarshan/portfolio/' + (av ? av.id : 'home')); return; }
+    if (parts[0] === 'cd') { var t2 = (parts[1] || 'home').replace(/^\//, ''); t2 = t2 === 'photos' ? 'photography' : t2; if (ORDER.indexOf(t2) > -1) { line('Opening ' + t2 + '...'); go(t2); } else line('cd: no such page: ' + (parts[1] || ''), 'e'); return; }
+    if (lc === 'random') { var rp = ORDER[Math.floor(Math.random() * ORDER.length)]; line('Taking you to ' + rp + '...'); go(rp); return; }
+    if (lc === 'echo' || parts[0] === 'echo') { line(args); return; }
+    if (lc === 'history') { line(hist.length ? hist.map(function (h, i) { return ('  ' + (i + 1)).slice(-3) + '  ' + h; }).join('\n') : 'No history yet.'); return; }
+    if (lc === 'exit' || lc === 'quit') { termOpen(false); return; }
+    if (parts[0] === 'theme') {
+      var root = document.documentElement, cur = root.dataset.theme === 'dark' ? 'dark' : 'light', want = parts[1];
+      if (!want) { line('Theme: ' + cur + '. Use: theme dark | theme light'); return; }
+      if (want !== 'dark' && want !== 'light') { line('Use: theme dark | theme light', 'e'); return; }
+      if (want !== cur) { var tb = document.getElementById('themeBtn'); if (tb) tb.click(); }
+      line('Theme set to ' + want + '.'); return;
+    }
+    if (lc === 'stats') {
+      var rl3 = repoList(), aw = document.querySelectorAll('.award').length, pod = document.querySelectorAll('.award[data-cat~="podium"]').length;
+      line('Repositories: ' + rl3.length + ' (' + rl3.filter(function (r) { return !r.priv; }).length + ' public, ' + rl3.filter(function (r) { return r.priv; }).length + ' private)\nAwards and certificates: ' + aw + ' (' + pod + ' podium finishes)\nPages: ' + ORDER.length); return;
+    }
+    if (lc === 'neofetch') {
+      var rl4 = repoList(), aw2 = document.querySelectorAll('.award').length, th = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+      line('  ____  ____     devadarshan@portfolio\n |  _ \\|  _ \\    ---------------------\n | |_) | | | |   Role:    President, Infocomm Club\n |  _ <| |_| |   School:  St. Andrew\'s JC, Singapore\n |_| \\_\\____/    Focus:   Python, cybersecurity\n                 Repos:   ' + rl4.length + '\n                 Awards:  ' + aw2 + '\n                 Theme:   ' + th + '\n                 Stack:   HTML, CSS, JS, no framework'); return;
+    }
+    if (lc === 'tip') { line(TIPS[Math.floor(Math.random() * TIPS.length)]); return; }
+    if (parts[0] === 'password' || parts[0] === 'passwd') {
+      var n = parts[1] ? parseInt(parts[1], 10) : 16;
+      if (!(n >= 8 && n <= 64)) { line('Usage: password [length 8-64]', 'e'); return; }
+      var set = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*-_=+', buf = new Uint32Array(n), lim = Math.floor(4294967296 / set.length) * set.length, pw = '';
+      while (pw.length < n) { crypto.getRandomValues(buf); for (var i = 0; i < buf.length && pw.length < n; i++) if (buf[i] < lim) pw += set[buf[i] % set.length]; }
+      line(pw + '\nMade on your device with crypto.getRandomValues. It is not stored or sent anywhere.'); return;
+    }
+    if (parts[0] === 'hash' || parts[0] === 'sha256') {
+      if (!args) { line('Usage: hash <text>'); return; }
+      if (!(window.crypto && crypto.subtle)) { line('Hashing needs a secure (https) page.', 'e'); return; }
+      crypto.subtle.digest('SHA-256', new TextEncoder().encode(args)).then(function (b) { line('SHA-256: ' + hex(b)); }); return;
+    }
+    if (parts[0] === 'b64' || parts[0] === 'base64') {
+      if (!args) { line('Usage: b64 <text>'); return; }
+      var by = new TextEncoder().encode(args), bs = ''; by.forEach(function (x) { bs += String.fromCharCode(x); }); line(btoa(bs)); return;
+    }
+    if (parts[0] === 'unb64') {
+      if (!args) { line('Usage: unb64 <base64>'); return; }
+      try { var raw2 = atob(args.replace(/\s+/g, '')), u8 = new Uint8Array(raw2.length); for (var k = 0; k < raw2.length; k++) u8[k] = raw2.charCodeAt(k); line(new TextDecoder().decode(u8)); } catch (e) { line('That is not valid Base64.', 'e'); } return;
+    }
+    if (parts[0] === 'caesar' || parts[0] === 'rot13') {
+      var sh, txt;
+      if (parts[0] === 'rot13') { sh = 13; txt = args; } else { sh = parseInt(parts[1], 10); txt = c.split(/\s+/).slice(2).join(' '); }
+      if (isNaN(sh) || !txt) { line('Usage: caesar <shift> <text>   (negative shifts decode, rot13 <text> is shift 13)'); return; }
+      line(shift(txt, sh)); return;
+    }
     if (DATA[lc]) { line(DATA[lc]); return; }
     line('command not found: ' + c + '. Type help.', 'e');
   }
@@ -436,10 +543,15 @@
   cmd.addEventListener('keydown', function (e) {
     if (e.key === 'ArrowUp' && hist.length) { e.preventDefault(); hi = Math.max(0, hi - 1); cmd.value = hist[hi] || ''; }
     else if (e.key === 'ArrowDown') { e.preventDefault(); hi = Math.min(hist.length, hi + 1); cmd.value = hist[hi] || ''; }
+    else if (e.key === 'Tab' && cmd.value && cmd.value.indexOf(' ') < 0) {
+      var pre = cmd.value.toLowerCase(), names = ['whoami','skills','reading','leadership','projects','awards','credentials','contact','cv','repos','open','search','langs','latest','github','password','hash','b64','unb64','caesar','rot13','tip','goto','ls','pwd','cd','random','stats','neofetch','uptime','date','theme','history','echo','clear','exit','ctf','hack','help'];
+      var m = names.filter(function (n) { return n.indexOf(pre) === 0; });
+      if (m.length === 1) { e.preventDefault(); cmd.value = m[0] + ' '; } else if (m.length > 1) { e.preventDefault(); line(m.join('  ')); }
+    }
     else if (e.key === 'Escape') termOpen(false);
     e.stopPropagation();
   });
-  ['whoami', 'skills', 'projects', 'github', 'ctf', 'hack', 'help'].forEach(function (c) {
+  ['whoami', 'skills', 'repos', 'neofetch', 'tip', 'ctf', 'hack', 'help'].forEach(function (c) {
     var b = document.createElement('button'); b.type = 'button'; b.textContent = c; b.addEventListener('click', function () { run(c); cmd.focus(); }); $('#quick').appendChild(b);
   });
 
