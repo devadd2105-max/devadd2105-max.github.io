@@ -1238,21 +1238,24 @@ html .medal.e.x{background:radial-gradient(circle at 30% 25%,#fff1a8,var(--pop,#
 .vf-top em{font-style:normal;color:#fff}
 .more h4{font-family:var(--mono);font-size:.74rem;color:var(--y);text-transform:uppercase;letter-spacing:.1em;margin:18px 0 6px}
 
-/* all repos on the home page */
-.repos{margin-top:clamp(28px,5vw,48px)}
-.repos-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 18px;margin-bottom:14px}
-.repos-h h3{font-size:clamp(1.25rem,2.4vw,1.6rem);margin:0}
-.repos-h p{font-size:.78rem;color:var(--dim);margin:0}
-.repos-h b{color:var(--y2)}
-.repos-h a{color:inherit;border-bottom:1px solid var(--line)}
-.repo-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
-.rrow{display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--card);border:1px solid var(--line);border-radius:14px;color:inherit;text-decoration:none;transition:border-color .2s,transform .2s,background .2s;min-height:58px}
-a.rrow:hover,a.rrow:focus-visible{border-color:var(--y2);transform:translateY(-2px);background:var(--card2)}
-.rrow .rn{font-size:.72rem;color:var(--y2);opacity:.85;flex:none}
-.rrow .rt{display:flex;flex-direction:column;min-width:0;flex:1}
-.rrow .rt b{font-size:.92rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.rrow .rt small{font-size:.7rem;color:var(--dim)}
-.rrow .ra{flex:none;font-size:.9rem;color:var(--y2);opacity:.8}
-.rrow.priv{border-style:dashed;opacity:.85}
-@media (prefers-reduced-motion:reduce){.rrow{transition:none}a.rrow:hover{transform:none}}
-@media (max-width:560px){.repo-grid{grid-template-columns:1fr 1fr;gap:8px}.rrow{padding:9px 10px;gap:8px}.rrow .rn,.rrow .ra{display:none}.rrow .rt b{font-size:.8rem}}
+/* all repos card in the Projects header (wide screens) */
+.repomini{display:none}
+@media (min-width:1000px){
+  #projects .head{display:grid;grid-template-columns:minmax(0,1fr) minmax(480px,640px);column-gap:28px;align-items:start}
+  #projects .head>*{grid-column:1}
+  #projects .repomini{display:block;grid-column:2;grid-row:1 / span 4;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px 14px}
+}
+.rm-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:2px 12px;margin-bottom:10px}
+.rm-h h3{margin:0;font-size:1.05rem}
+.rm-h p{margin:0;font-size:.7rem;color:var(--dim)}
+.rm-h b{color:var(--y2)}
+.repomini ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.repomini .rrow{display:flex;align-items:center;gap:8px;padding:7px 9px;border:1px solid var(--line);border-radius:10px;color:inherit;text-decoration:none;background:rgba(255,255,255,.04);transition:border-color .2s,background .2s;height:100%;box-sizing:border-box}
+.repomini a.rrow:hover,.repomini a.rrow:focus-visible{border-color:var(--y2);background:var(--card2)}
+.repomini .rn{font-size:.62rem;color:var(--y2);flex:none}
+.repomini .rt{display:flex;flex-direction:column;min-width:0;flex:1}
+.repomini .rt b{font-size:.74rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.repomini .rt small{font-size:.6rem;color:var(--dim)}
+.repomini .rrow.priv{border-style:dashed;opacity:.85}
+.repomini .rrow.priv span{font-size:.7rem}
+@media (prefers-reduced-motion:reduce){.repomini .rrow{transition:none}}
