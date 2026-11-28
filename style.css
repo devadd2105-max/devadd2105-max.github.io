@@ -1320,3 +1320,13 @@ html .medal.e.x{background:radial-gradient(circle at 30% 25%,#fff1a8,var(--pop,#
   #projects .head .repomini{align-self:stretch;display:flex;flex-direction:column;box-sizing:border-box}
   #projects .head .repomini>ul{flex:1;grid-auto-rows:1fr;align-content:stretch}
 }
+
+/* dock: always fits on tablets (labels only on the current page) and never lets content show through */
+@media (max-width:1280px){
+  .dock button span{display:none}
+  .dock button[aria-current="page"] span{display:inline}
+  .dock button{padding:10px 13px}
+  .dock{overflow-x:visible}
+}
+html .dock,html.px .dock{background:#071238;-webkit-backdrop-filter:none;backdrop-filter:none}
+html[data-theme="light"] .dock,html.px[data-theme="light"] .dock{background:#ffffff}
