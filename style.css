@@ -1259,3 +1259,10 @@ html .medal.e.x{background:radial-gradient(circle at 30% 25%,#fff1a8,var(--pop,#
 .repomini .rrow.priv{border-style:dashed;opacity:.85}
 .repomini .rrow.priv span{font-size:.7rem}
 @media (prefers-reduced-motion:reduce){.repomini .rrow{transition:none}}
+
+/* repo icons and colour */
+.repomini .rrow{border-left:3px solid var(--c,var(--line))}
+.repomini .ri{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:8px;font-size:.95rem;font-style:normal;background:color-mix(in srgb,var(--c,#888) 22%,transparent)}
+.repomini a.rrow:hover,.repomini a.rrow:focus-visible{border-color:var(--c,var(--y2));background:color-mix(in srgb,var(--c,#888) 12%,var(--card2))}
+#pp3 .card.demo{border-top:3px solid var(--c,var(--line))}
+#pp3 .card.demo b .ri{display:inline-grid;place-items:center;width:26px;height:26px;margin-right:6px;border-radius:8px;font-style:normal;font-size:.95rem;vertical-align:middle;background:color-mix(in srgb,var(--c,#888) 22%,transparent)}
