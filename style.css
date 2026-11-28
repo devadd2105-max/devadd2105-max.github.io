@@ -1330,3 +1330,31 @@ html .medal.e.x{background:radial-gradient(circle at 30% 25%,#fff1a8,var(--pop,#
 }
 html .dock,html.px .dock{background:#071238;-webkit-backdrop-filter:none;backdrop-filter:none}
 html[data-theme="light"] .dock,html.px[data-theme="light"] .dock{background:#ffffff}
+
+/* about + programmes + photography polish */
+.about .chips{justify-content:center}
+.mm .fchips,.mm .chips{justify-content:center}
+.ico{margin-right:6px}
+.mm .chips li{display:inline-flex;align-items:center}
+.beyond .card{position:relative}
+.beyond .bico{position:absolute;top:12px;right:14px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:1.15rem;background:rgba(255,255,255,.08);border:1px solid var(--line)}
+.beyond b.gold{color:#b8860b;font-weight:700}
+.beyond b.belt{color:#15803d;font-weight:700}
+.beyond b.silv{color:#7b8492;font-weight:700}
+html[data-theme="dark"] .beyond b.gold{color:#f5c518}
+html[data-theme="dark"] .beyond b.belt{color:#22c55e}
+html[data-theme="dark"] .beyond b.silv{color:#c0c7d0}
+.bento .tile{position:relative}
+.bento .tile .tprev{position:absolute;top:16px;right:16px;width:96px;height:72px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+.bento .tile .tprev~.tag{max-width:calc(100% - 120px)}
+.bento .tile .tprev~h3,.bento .tile .tprev~p{padding-right:0}
+.focalcard{display:flex;gap:12px;align-items:center;max-width:360px;margin-top:14px;padding:8px;border:1px solid var(--line);border-radius:14px;background:var(--card);color:inherit;text-decoration:none}
+.focalcard img{width:130px;height:auto;aspect-ratio:1280/900;object-fit:cover;border-radius:8px}
+.focalcard .fc-t b{display:block;font-size:1rem}.focalcard small{color:var(--mu);font-size:.8rem}
+@media (min-width:900px){
+ #photography .head{display:grid;grid-template-columns:minmax(0,1fr) 340px;column-gap:28px;align-items:start}
+ #photography .head>*{grid-column:1}
+ #photography .head .focalcard{grid-column:2;grid-row:1/5;margin-top:0;flex-direction:column;align-items:stretch;max-width:none}
+ #photography .head .focalcard img{width:100%}
+}
+@media (max-width:600px){.bento .tile .tprev{width:72px;height:54px}.bento .tile .tprev~.tag{max-width:calc(100% - 90px)}}
